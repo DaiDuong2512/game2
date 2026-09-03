@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="vi" data-ui-theme="rift-relic">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050b12" />
+  <meta name="description" content="Hộ Vệ Khe Nứt: Cuộc Vây Hãm Vọng Âm — trò chơi sinh tồn hành động nguyên bản với giao diện hoàn toàn bằng tiếng Việt." />
+  <title>Hộ Vệ Khe Nứt: Cuộc Vây Hãm Vọng Âm</title>
+  <link rel="icon" type="image/png" href="./assets/generated/app-icon-v2.png" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <canvas id="game-canvas" role="img" aria-label="Chiến trường Hộ Vệ Khe Nứt"></canvas>
+    <div id="vignette" aria-hidden="true"></div>
+    <main id="screen-root" class="screen-root" aria-label="Giao diện trò chơi"></main>
+    <div id="hud-root" class="hud-root hidden" aria-label="Giao diện trận đấu"></div>
+    <div id="toast-root" class="toast-root" aria-live="polite"></div>
+    <div id="loading" class="loading-screen" role="status" aria-live="polite" aria-label="Đang tải trò chơi">
+      <div class="loading-brand" aria-label="Hộ Vệ Khe Nứt: Cuộc Vây Hãm Vọng Âm"><strong>HỘ VỆ KHE NỨT</strong><span>GIAO THỨC DI VẬT KHE NỨT</span></div>
+      <div class="loading-track"><span></span></div>
+      <p>Đang đồng bộ lõi Di Vật…</p>
+    </div>
+  </div>
+  <noscript>Trò chơi này cần JavaScript để hoạt động.</noscript>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
