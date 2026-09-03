@@ -1,0 +1,620 @@
+[
+  {
+    "id": "glassward-verge",
+    "index": 1,
+    "name": "Rìa Cõi Thủy Tinh",
+    "description": "Tiền tuyến nứt vỡ đầu tiên.",
+    "thumbnail": "assets/generated/stages/glassward-verge.png",
+    "duration": 150,
+    "waveCount": 4,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "riftling",
+      "razorling",
+      "stoneback",
+      "shard-archer"
+    ],
+    "theme": {
+      "background": "#092d35",
+      "accent": "#2dd4bf",
+      "grid": "#164e63"
+    },
+    "spawnBase": 5.779999999999999,
+    "rewardGold": 138,
+    "rewardShards": 3
+  },
+  {
+    "id": "echo-caverns",
+    "index": 2,
+    "name": "Hang Động Vọng Âm",
+    "description": "Tiếng vọng pha lê làm lộ ra những đàn quái ẩn mình.",
+    "thumbnail": "assets/generated/stages/echo-caverns.png",
+    "duration": 154,
+    "waveCount": 4,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "riftling",
+      "razorling",
+      "stoneback",
+      "shard-archer",
+      "gale-charger",
+      "echo-wisp"
+    ],
+    "theme": {
+      "background": "#101b35",
+      "accent": "#60a5fa",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 5.96,
+    "rewardGold": 166,
+    "rewardShards": 4
+  },
+  {
+    "id": "ashen-ruins",
+    "index": 3,
+    "name": "Phế Tích Tro Tàn",
+    "description": "Những xưởng đúc đổ nát và các đàn quái than hồng.",
+    "thumbnail": "assets/generated/stages/ashen-ruins.png",
+    "duration": 158,
+    "waveCount": 4,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "riftling",
+      "razorling",
+      "stoneback",
+      "shard-archer",
+      "gale-charger",
+      "echo-wisp",
+      "mender"
+    ],
+    "theme": {
+      "background": "#331a18",
+      "accent": "#fb923c",
+      "grid": "#164e63"
+    },
+    "spawnBase": 6.14,
+    "rewardGold": 194,
+    "rewardShards": 4
+  },
+  {
+    "id": "mire-sanctum",
+    "index": 4,
+    "name": "Thánh Điện Đầm Độc",
+    "description": "Những vũng độc và các kẻ trị thương không ngừng nghỉ.",
+    "thumbnail": "assets/generated/stages/mire-sanctum.png",
+    "duration": 162,
+    "waveCount": 4,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "riftling",
+      "razorling",
+      "stoneback",
+      "shard-archer",
+      "gale-charger",
+      "echo-wisp",
+      "mender",
+      "brood-caller",
+      "cinder-sac"
+    ],
+    "theme": {
+      "background": "#15331f",
+      "accent": "#4ade80",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 6.319999999999999,
+    "rewardGold": 222,
+    "rewardShards": 5
+  },
+  {
+    "id": "sundered-dunes",
+    "index": 5,
+    "name": "Cồn Cát Vỡ Nát",
+    "description": "Địa hình trống trải tạo lợi thế cho kỵ binh và xạ thủ.",
+    "thumbnail": "assets/generated/stages/sundered-dunes.png",
+    "duration": 166,
+    "waveCount": 5,
+    "bossId": "void-devourer",
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "razorling",
+      "stoneback",
+      "shard-archer",
+      "gale-charger",
+      "echo-wisp",
+      "mender",
+      "brood-caller",
+      "cinder-sac",
+      "aegis-shell"
+    ],
+    "theme": {
+      "background": "#3a2715",
+      "accent": "#fbbf24",
+      "grid": "#164e63"
+    },
+    "spawnBase": 6.5,
+    "rewardGold": 250,
+    "rewardShards": 5
+  },
+  {
+    "id": "frostspire",
+    "index": 6,
+    "name": "Tháp Băng Giá",
+    "description": "Những lối đi đóng băng trừng phạt mọi bước di chuyển sai lầm.",
+    "thumbnail": "assets/generated/stages/frostspire.png",
+    "duration": 170,
+    "waveCount": 5,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "shard-archer",
+      "gale-charger",
+      "echo-wisp",
+      "mender",
+      "brood-caller",
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter"
+    ],
+    "theme": {
+      "background": "#0e2940",
+      "accent": "#7dd3fc",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 6.68,
+    "rewardGold": 278,
+    "rewardShards": 6
+  },
+  {
+    "id": "grave-bloom",
+    "index": 7,
+    "name": "Vườn Mộ Nở Hoa",
+    "description": "Những khu vườn chết phân tách thành các mối đe dọa mới.",
+    "thumbnail": "assets/generated/stages/grave-bloom.png",
+    "duration": 174,
+    "waveCount": 5,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "echo-wisp",
+      "mender",
+      "brood-caller",
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech"
+    ],
+    "theme": {
+      "background": "#24152d",
+      "accent": "#c084fc",
+      "grid": "#164e63"
+    },
+    "spawnBase": 6.859999999999999,
+    "rewardGold": 306,
+    "rewardShards": 6
+  },
+  {
+    "id": "iron-citadel",
+    "index": 8,
+    "name": "Thành Trì Sắt",
+    "description": "Những bức tường khiên và cỗ máy hạng nặng chắn lối.",
+    "thumbnail": "assets/generated/stages/iron-citadel.png",
+    "duration": 178,
+    "waveCount": 5,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "echo-wisp",
+      "mender",
+      "brood-caller",
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper"
+    ],
+    "theme": {
+      "background": "#24292f",
+      "accent": "#94a3b8",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 7.039999999999999,
+    "rewardGold": 334,
+    "rewardShards": 7
+  },
+  {
+    "id": "ember-core",
+    "index": 9,
+    "name": "Lõi Than Hồng",
+    "description": "Quái tự nổ chen chúc quanh một lò phản ứng đang bốc cháy.",
+    "thumbnail": "assets/generated/stages/ember-core.png",
+    "duration": 182,
+    "waveCount": 5,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "mender",
+      "brood-caller",
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage"
+    ],
+    "theme": {
+      "background": "#3b1711",
+      "accent": "#f97316",
+      "grid": "#164e63"
+    },
+    "spawnBase": 7.22,
+    "rewardGold": 362,
+    "rewardShards": 7
+  },
+  {
+    "id": "deep-strata",
+    "index": 10,
+    "name": "Địa Tầng Sâu",
+    "description": "Quái đào hang tấn công từ dưới lòng đất.",
+    "thumbnail": "assets/generated/stages/deep-strata.png",
+    "duration": 186,
+    "waveCount": 6,
+    "bossId": "iron-behemoth",
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "brood-caller",
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute"
+    ],
+    "theme": {
+      "background": "#1a2630",
+      "accent": "#38bdf8",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 7.3999999999999995,
+    "rewardGold": 390,
+    "rewardShards": 8
+  },
+  {
+    "id": "crystal-arc",
+    "index": 11,
+    "name": "Vòm Pha Lê",
+    "description": "Sét lan trừng phạt mọi sai lầm.",
+    "thumbnail": "assets/generated/stages/crystal-arc.png",
+    "duration": 190,
+    "waveCount": 6,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald"
+    ],
+    "theme": {
+      "background": "#14213d",
+      "accent": "#818cf8",
+      "grid": "#164e63"
+    },
+    "spawnBase": 7.58,
+    "rewardGold": 418,
+    "rewardShards": 8
+  },
+  {
+    "id": "verdant-lab",
+    "index": 12,
+    "name": "Phòng Thí Nghiệm Xanh",
+    "description": "Độc tố đột biến lây lan giữa các đàn quái.",
+    "thumbnail": "assets/generated/stages/verdant-lab.png",
+    "duration": 194,
+    "waveCount": 6,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "brood-caller",
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald"
+    ],
+    "theme": {
+      "background": "#123127",
+      "accent": "#34d399",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 7.76,
+    "rewardGold": 446,
+    "rewardShards": 9
+  },
+  {
+    "id": "clockwork-bastion",
+    "index": 13,
+    "name": "Pháo Đài Cơ Giới",
+    "description": "Đội hình thiết giáp dày đặc tiến lên theo nhịp máy.",
+    "thumbnail": "assets/generated/stages/clockwork-bastion.png",
+    "duration": 198,
+    "waveCount": 6,
+    "bossId": null,
+    "eliteId": "storm-herald",
+    "allowedEnemies": [
+      "brood-caller",
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald"
+    ],
+    "theme": {
+      "background": "#29241c",
+      "accent": "#f59e0b",
+      "grid": "#164e63"
+    },
+    "spawnBase": 7.9399999999999995,
+    "rewardGold": 474,
+    "rewardShards": 9
+  },
+  {
+    "id": "dark-citadel",
+    "index": 14,
+    "name": "Thành Trì Hắc Ám",
+    "description": "Những sát thủ xuất hiện phía sau Hộ Vệ.",
+    "thumbnail": "assets/generated/stages/dark-citadel.png",
+    "duration": 202,
+    "waveCount": 6,
+    "bossId": null,
+    "eliteId": "void-sentinel",
+    "allowedEnemies": [
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald",
+      "void-sentinel"
+    ],
+    "theme": {
+      "background": "#1d1428",
+      "accent": "#a78bfa",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 8.12,
+    "rewardGold": 502,
+    "rewardShards": 10
+  },
+  {
+    "id": "sky-temple",
+    "index": 15,
+    "name": "Thiên Điện",
+    "description": "Quái bay và pháp sư bão tố thống trị chiến trường.",
+    "thumbnail": "assets/generated/stages/sky-temple.png",
+    "duration": 206,
+    "waveCount": 7,
+    "bossId": "frost-queen",
+    "eliteId": "void-sentinel",
+    "allowedEnemies": [
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald",
+      "void-sentinel",
+      "chaos-priest"
+    ],
+    "theme": {
+      "background": "#10283a",
+      "accent": "#22d3ee",
+      "grid": "#164e63"
+    },
+    "spawnBase": 8.299999999999999,
+    "rewardGold": 530,
+    "rewardShards": 10
+  },
+  {
+    "id": "chaos-gate",
+    "index": 16,
+    "name": "Cổng Hỗn Mang",
+    "description": "Mọi loại quân địch phối hợp dưới sự chỉ huy của tinh anh.",
+    "thumbnail": "assets/generated/stages/chaos-gate.png",
+    "duration": 210,
+    "waveCount": 7,
+    "bossId": null,
+    "eliteId": "void-sentinel",
+    "allowedEnemies": [
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald",
+      "void-sentinel",
+      "chaos-priest"
+    ],
+    "theme": {
+      "background": "#2e142d",
+      "accent": "#e879f9",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 8.48,
+    "rewardGold": 558,
+    "rewardShards": 11
+  },
+  {
+    "id": "void-march",
+    "index": 17,
+    "name": "Cuộc Hành Quân Hư Không",
+    "description": "Những đàn quái dày đặc bẻ cong không gian xung quanh chúng.",
+    "thumbnail": "assets/generated/stages/void-march.png",
+    "duration": 214,
+    "waveCount": 7,
+    "bossId": null,
+    "eliteId": "void-sentinel",
+    "allowedEnemies": [
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald",
+      "void-sentinel",
+      "chaos-priest"
+    ],
+    "theme": {
+      "background": "#101221",
+      "accent": "#8b5cf6",
+      "grid": "#164e63"
+    },
+    "spawnBase": 8.66,
+    "rewardGold": 586,
+    "rewardShards": 11
+  },
+  {
+    "id": "final-realm",
+    "index": 18,
+    "name": "Cõi Cuối",
+    "description": "Toàn bộ tiền tuyến sụp đổ thành một chiến trường khốc liệt.",
+    "thumbnail": "assets/generated/stages/final-realm.png",
+    "duration": 218,
+    "waveCount": 7,
+    "bossId": null,
+    "eliteId": "void-sentinel",
+    "allowedEnemies": [
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald",
+      "void-sentinel",
+      "chaos-priest"
+    ],
+    "theme": {
+      "background": "#321212",
+      "accent": "#ef4444",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 8.84,
+    "rewardGold": 614,
+    "rewardShards": 12
+  },
+  {
+    "id": "rift-heart",
+    "index": 19,
+    "name": "Trái Tim Khe Nứt",
+    "description": "Đòn đánh của trùm chồng lấn cùng quân tinh anh tiếp viện.",
+    "thumbnail": "assets/generated/stages/rift-heart.png",
+    "duration": 222,
+    "waveCount": 7,
+    "bossId": null,
+    "eliteId": "void-sentinel",
+    "allowedEnemies": [
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald",
+      "void-sentinel",
+      "chaos-priest"
+    ],
+    "theme": {
+      "background": "#201033",
+      "accent": "#d946ef",
+      "grid": "#164e63"
+    },
+    "spawnBase": 9.02,
+    "rewardGold": 642,
+    "rewardShards": 12
+  },
+  {
+    "id": "eternal-siege",
+    "index": 20,
+    "name": "Cuộc Vây Hãm Vĩnh Hằng",
+    "description": "Trận tổng công kích nhiều giai đoạn không còn lối đi an toàn.",
+    "thumbnail": "assets/generated/stages/eternal-siege.png",
+    "duration": 226,
+    "waveCount": 8,
+    "bossId": "lord-infernus",
+    "eliteId": "void-sentinel",
+    "allowedEnemies": [
+      "brood-caller",
+      "cinder-sac",
+      "aegis-shell",
+      "nightstalker",
+      "rift-splitter",
+      "burrower",
+      "blood-leech",
+      "rift-sniper",
+      "vortex-mage",
+      "iron-brute",
+      "storm-herald",
+      "void-sentinel",
+      "chaos-priest"
+    ],
+    "theme": {
+      "background": "#2b0d0d",
+      "accent": "#f59e0b",
+      "grid": "#1e3a5f"
+    },
+    "spawnBase": 9.2,
+    "rewardGold": 670,
+    "rewardShards": 13
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "base-hp",
+    "name": "Sinh Lực Cơ Bản",
+    "stat": "maxHp",
+    "baseCost": 80,
+    "costGrowth": 1.18,
+    "perLevel": 4
+  },
+  {
+    "id": "base-damage",
+    "name": "Sát Thương",
+    "stat": "damage",
+    "baseCost": 95,
+    "costGrowth": 1.19,
+    "perLevel": 0.018
+  },
+  {
+    "id": "base-armor",
+    "name": "Giáp",
+    "stat": "armor",
+    "baseCost": 110,
+    "costGrowth": 1.22,
+    "perLevel": 0.35
+  },
+  {
+    "id": "base-speed",
+    "name": "Tốc Độ Di Chuyển",
+    "stat": "moveSpeed",
+    "baseCost": 90,
+    "costGrowth": 1.18,
+    "perLevel": 0.008
+  },
+  {
+    "id": "exp-gain",
+    "name": "Kinh Nghiệm Nhận Được",
+    "stat": "expGain",
+    "baseCost": 85,
+    "costGrowth": 1.2,
+    "perLevel": 0.015
+  },
+  {
+    "id": "gold-gain",
+    "name": "Vàng Nhận Được",
+    "stat": "goldGain",
+    "baseCost": 90,
+    "costGrowth": 1.2,
+    "perLevel": 0.018
+  },
+  {
+    "id": "luck",
+    "name": "May Mắn",
+    "stat": "luck",
+    "baseCost": 140,
+    "costGrowth": 1.24,
+    "perLevel": 0.012
+  }
+]

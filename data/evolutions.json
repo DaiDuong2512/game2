@@ -1,0 +1,156 @@
+[
+  {
+    "id": "phantom-crescent",
+    "name": "Trăng Khuyết Ảo Ảnh",
+    "weapon": "rift-blade",
+    "passive": "keen-lens",
+    "description": "Tạo ba nhát chém vọng lại, mở rộng gần gấp đôi tầm quét của lưỡi đao.",
+    "damageMultiplier": 2.0,
+    "cooldownMultiplier": 0.68,
+    "countBonus": 2,
+    "effect": "phantom"
+  },
+  {
+    "id": "star-piercer",
+    "name": "Mũi Tên Xuyên Tinh",
+    "weapon": "echo-bow",
+    "passive": "wind-feathers",
+    "description": "Mũi tên tinh giới xuyên qua cả đàn địch; đòn chí mạng tự bẻ hướng tìm mục tiêu tiếp theo.",
+    "damageMultiplier": 1.65,
+    "cooldownMultiplier": 0.72,
+    "countBonus": 2,
+    "effect": "split"
+  },
+  {
+    "id": "singularity-engine",
+    "name": "Cỗ Máy Điểm Dị",
+    "weapon": "gravity-bomb",
+    "passive": "bulwark-heart",
+    "description": "Bom tạo lực hút mạnh trên đường bay rồi phát nổ trong vùng ảnh hưởng cực lớn.",
+    "damageMultiplier": 2.25,
+    "cooldownMultiplier": 0.72,
+    "countBonus": 1,
+    "effect": "gravity"
+  },
+  {
+    "id": "storm-crown",
+    "name": "Vương Miện Bão Tố",
+    "weapon": "storm-call",
+    "passive": "chrono-sigil",
+    "description": "Bão sét liên tục lan truyền xuyên suốt toàn bộ đàn địch.",
+    "damageMultiplier": 1.8,
+    "cooldownMultiplier": 0.48,
+    "countBonus": 5,
+    "effect": "storm"
+  },
+  {
+    "id": "sunfall-comet",
+    "name": "Sao Chổi Nhật Lạc",
+    "weapon": "ember-orb",
+    "passive": "power-core",
+    "description": "Hỏa cầu giáng xuống thành những thiên thạch cháy khổng lồ.",
+    "damageMultiplier": 2.35,
+    "cooldownMultiplier": 0.72,
+    "countBonus": 1,
+    "effect": "meteor"
+  },
+  {
+    "id": "glacial-cathedral",
+    "name": "Thánh Đường Băng Giá",
+    "weapon": "frost-shards",
+    "passive": "longscope",
+    "description": "Hai vòng mảnh băng đồng tâm lan ra, xuyên sâu và gần như luôn gây hiệu ứng Băng.",
+    "damageMultiplier": 1.8,
+    "cooldownMultiplier": 0.65,
+    "countBonus": 6,
+    "effect": "cathedral"
+  },
+  {
+    "id": "plague-garden",
+    "name": "Vườn Dịch Độc",
+    "weapon": "venom-bloom",
+    "passive": "vital-seed",
+    "description": "Tạo nhiều vùng độc lớn hơn, tồn tại lâu hơn và gây sát thương theo nhịp nhanh hơn.",
+    "damageMultiplier": 1.7,
+    "cooldownMultiplier": 0.68,
+    "countBonus": 2,
+    "effect": "garden"
+  },
+  {
+    "id": "legion-echo",
+    "name": "Quân Đoàn Vọng Âm",
+    "weapon": "echo-summon",
+    "passive": "echo-prism",
+    "description": "Mỗi vọng âm có thêm một bản sao linh thể và đồng loạt khai hỏa.",
+    "damageMultiplier": 1.7,
+    "cooldownMultiplier": 0.62,
+    "countBonus": 4,
+    "effect": "legion"
+  },
+  {
+    "id": "riftstorm-battery",
+    "name": "Ắc Quy Bão Khe Nứt",
+    "weapon": "pulse-rifle",
+    "passive": "endless-magazine",
+    "description": "Loạt đạn dày tự hiệu chỉnh quỹ đạo và xuyên thêm nhiều mục tiêu mà không tăng tải hiệu ứng vô hạn.",
+    "damageMultiplier": 1.35,
+    "cooldownMultiplier": 0.72,
+    "countBonus": 1,
+    "effect": "barrage"
+  },
+  {
+    "id": "phase-echo-hive",
+    "name": "Tổ Phi Tiêu Vọng Pha",
+    "weapon": "phase-darts",
+    "passive": "void-drill",
+    "description": "Phi tiêu tự uốn quỹ đạo giữa đám đông và xuyên thêm bốn mục tiêu.",
+    "damageMultiplier": 1.4,
+    "cooldownMultiplier": 0.74,
+    "countBonus": 1,
+    "effect": "phase-echo"
+  },
+  {
+    "id": "event-horizon-prism",
+    "name": "Lăng Kính Chân Trời Sự Kiện",
+    "weapon": "void-laser",
+    "passive": "chrono-sigil",
+    "description": "Phân tia Hư Không thành tối đa bảy luồng; số tia vượt giới hạn được gộp vào sát thương.",
+    "damageMultiplier": 1.75,
+    "cooldownMultiplier": 0.66,
+    "countBonus": 2,
+    "effect": "prism"
+  },
+  {
+    "id": "walking-citadel",
+    "name": "Thành Lũy Chuyển Động",
+    "weapon": "aegis-orbit",
+    "passive": "iron-bark",
+    "description": "Thánh thuẫn tạo hai lớp quỹ đạo trong và ngoài, giữ an toàn cho cả lối đánh áp sát lẫn tầm trung.",
+    "damageMultiplier": 1.55,
+    "cooldownMultiplier": 0.72,
+    "countBonus": 2,
+    "effect": "citadel"
+  },
+  {
+    "id": "eclipse-supernova",
+    "name": "Siêu Tân Tinh Nhật Thực",
+    "weapon": "arcane-nova",
+    "passive": "phase-cloak",
+    "description": "Mỗi tinh thể Huyền Thuật phát nổ khi chạm mục tiêu hoặc hết tầm, phủ kín khoảng trống giữa các tia.",
+    "damageMultiplier": 1.65,
+    "cooldownMultiplier": 0.68,
+    "countBonus": 5,
+    "effect": "supernova"
+  },
+  {
+    "id": "miasma-dominion",
+    "name": "Lãnh Địa Chướng Khí",
+    "weapon": "toxic-smoke-bomb",
+    "passive": "vital-seed",
+    "description": "Đám khói độc mở rộng 25%, sát thương độc mạnh hơn và được ném thường xuyên hơn.",
+    "damageMultiplier": 1.45,
+    "cooldownMultiplier": 0.68,
+    "countBonus": 0,
+    "effect": "miasma"
+  }
+]

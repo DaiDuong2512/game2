@@ -1,0 +1,1247 @@
+{
+  "version": 1,
+  "premise": {
+    "title": "Tiếng Vọng Sau Vết Nứt",
+    "hook": "Mạng Mỏ Neo của Kết Giới Vọng Âm đang vỡ từ bên trong, biến ký ức của người đã khuất thành quái vật.",
+    "conflict": "Tám Hộ Vệ lần theo bốn Mảnh Ấn trước khi Chúa Tể Hỏa Ngục dùng Trái Tim Khe Nứt viết lại thế giới.",
+    "stakes": "Nếu thất bại, mọi thành phố sẽ còn tồn tại nhưng cư dân chỉ là những tiếng vọng không có ý chí."
+  },
+  "acts": [
+    {
+      "id": "mo-neo-ran-vo",
+      "index": 1,
+      "title": "Hồi I — Mỏ Neo Rạn Vỡ",
+      "subtitle": "Từ phòng tuyến đổ vỡ đến lời khai của người chết",
+      "stageStart": 1,
+      "stageEnd": 7,
+      "summary": "Kael truy dấu cuộc phá hoại, giải cứu Mira, giành Mảnh Ấn đầu tiên và tìm được lời khai bị Hội Đồng xóa bỏ."
+    },
+    {
+      "id": "bao-hu-khong",
+      "index": 2,
+      "title": "Hồi II — Bão Hư Không",
+      "subtitle": "Sự thật nằm dưới thép, độc và ký ức bị giam",
+      "stageStart": 8,
+      "stageEnd": 14,
+      "summary": "Đội Hộ Vệ phát hiện Kết Giới từng bị biến thành vũ khí và tập hợp những người có thể sửa lại sai lầm cũ."
+    },
+    {
+      "id": "trai-tim-hon-mang",
+      "index": 3,
+      "title": "Hồi III — Trái Tim Hỗn Mang",
+      "subtitle": "Không hi sinh thêm một linh hồn nào",
+      "stageStart": 15,
+      "stageEnd": 20,
+      "summary": "Các Hộ Vệ giải thoát Nữ Hoàng Băng Giá, đánh thức Titan và chọn cứu Nova thay vì lặp lại nghi thức hi sinh."
+    }
+  ],
+  "stages": [
+    {
+      "stageId": "glassward-verge",
+      "actId": "mo-neo-ran-vo",
+      "synopsis": "Mỏ Neo biên giới im tiếng hé lộ dấu vết của kẻ phá hoại.",
+      "objectives": ["Sống sót qua 4 đợt", "Giữ tuyến quanh Mỏ Neo", "Hạ Sứ Giả Bão Tố"],
+      "prelude": {
+        "id": "man-01-dan",
+        "title": "Mỏ Neo cuối cùng",
+        "speaker": "Đài Chỉ Huy",
+        "text": "Mỏ Neo Rìa Cõi vừa tắt. Hãy giữ lõi cộng hưởng sáng và tìm đội gác mất tích."
+      },
+      "midStage": {
+        "id": "man-01-giua",
+        "title": "Vết cắt quay vào trong",
+        "speaker": "Kael",
+        "text": "Trụ phòng thủ bị chém từ phía thành. Đây không phải móng vuốt của quái vật.",
+        "triggerProgress": 0.42
+      },
+      "finale": {
+        "id": "man-01-cuoi",
+        "title": "Kẻ giữ bằng chứng",
+        "speaker": "Đài Chỉ Huy",
+        "text": "Sứ Giả Bão Tố đang mang lõi ghi nhớ của trạm. Đừng để nó thoát.",
+        "kind": "elite"
+      },
+      "victory": {
+        "id": "man-01-thang",
+        "title": "Họa Đồ Sư trở về",
+        "speaker": "Mira",
+        "text": "Tôi thoát theo đường thông khí. Đội thám sát vẫn kẹt trong tinh thể; hãy cùng tôi đưa ký ức của họ về."
+      },
+      "codexUnlockIds": ["ket-gioi-vong-am", "dai-chi-huy-thuy-tinh"]
+    },
+    {
+      "stageId": "echo-caverns",
+      "actId": "mo-neo-ran-vo",
+      "synopsis": "Mira dẫn đội trở lại hang để thu hồi bản đồ và ký ức cuối cùng của đoàn thám sát.",
+      "objectives": ["Sống sót qua 4 đợt", "Thu hồi nhật ký thám sát", "Hạ kẻ tinh anh giữ bản đồ"],
+      "prelude": {
+        "id": "man-02-dan",
+        "title": "Bản đồ biết gọi tên",
+        "speaker": "Đài Chỉ Huy",
+        "text": "Nhật ký của đội Mira vẫn bị kẹt trong tinh thể. Hãy thu hồi trước khi hang lặp chúng thành quái vật."
+      },
+      "midStage": {
+        "id": "man-02-giua",
+        "title": "Đường bạc xuyên ký ức",
+        "speaker": "Mira",
+        "text": "Đi theo những mũi tên bạc và đừng tin lối đi gọi đúng tên anh. Ký ức thật luôn có bóng.",
+        "triggerProgress": 0.46
+      },
+      "finale": {
+        "id": "man-02-cuoi",
+        "title": "Tiếng vọng canh cửa",
+        "speaker": "Mira",
+        "text": "Kẻ tinh anh đang giữ mảnh bản đồ cuối. Phá lớp cộng hưởng quanh nó trước.",
+        "kind": "elite"
+      },
+      "victory": {
+        "id": "man-02-thang",
+        "title": "Bản đồ được hoàn tất",
+        "speaker": "Mira",
+        "text": "Bản đồ này chỉ tới Phế Tích Tro Tàn. Kẻ phá hoại đã đi qua lò rèn cũ."
+      },
+      "codexUnlockIds": ["hang-dong-vong-am"]
+    },
+    {
+      "stageId": "ashen-ruins",
+      "actId": "mo-neo-ran-vo",
+      "synopsis": "Dấu kim loại lạ dẫn đội Hộ Vệ qua những lò đúc đã cháy rỗng.",
+      "objectives": ["Sống sót qua 4 đợt", "Xác minh Dấu Búa Thánh Thuẫn", "Hạ kẻ tinh anh hút nhiệt"],
+      "prelude": {
+        "id": "man-03-dan",
+        "title": "Lò rèn không người",
+        "speaker": "Mira",
+        "text": "Dòng nhiệt vẫn chạy dù xưởng đã bỏ hoang. Có ai đó vừa rèn một chìa khóa khổng lồ."
+      },
+      "midStage": {
+        "id": "man-03-giua",
+        "title": "Dấu búa Thánh Thuẫn",
+        "speaker": "Kael",
+        "text": "Mảnh thép này mang dấu của Toren Vale, nhưng đường cắt cố ý bắt chước tay ông ấy.",
+        "triggerProgress": 0.44
+      },
+      "finale": {
+        "id": "man-03-cuoi",
+        "title": "Lửa giữ cửa",
+        "speaker": "Đài Chỉ Huy",
+        "text": "Kẻ tinh anh đang hút nhiệt từ toàn bộ phế tích. Hạ nó trước khi lò đúc nổ tung.",
+        "kind": "elite"
+      },
+      "victory": {
+        "id": "man-03-thang",
+        "title": "Tro nói thật",
+        "speaker": "Mira",
+        "text": "Tro còn lưu dấu chân hướng tới Thánh Điện Đầm Độc. Chúng đang che mùi kim loại bằng độc khí."
+      },
+      "codexUnlockIds": ["phe-tich-tro-tan", "dau-bua-thanh-thuan"]
+    },
+    {
+      "stageId": "mire-sanctum",
+      "actId": "mo-neo-ran-vo",
+      "synopsis": "Một chất độc được tạo ra để làm câm tiếng vọng đang phủ kín thánh điện.",
+      "objectives": ["Sống sót qua 4 đợt", "Giữ mẫu thuốc giải nguyên vẹn", "Hạ kẻ tinh anh truyền độc"],
+      "prelude": {
+        "id": "man-04-dan",
+        "title": "Đầm lầy im tiếng",
+        "speaker": "Mira",
+        "text": "Ở đây không có tiếng vọng nào. Sự im lặng này được chế tạo, không phải tự nhiên."
+      },
+      "midStage": {
+        "id": "man-04-giua",
+        "title": "Liều thuốc không tên",
+        "speaker": "Kael",
+        "text": "Một ống giải độc còn ấm, khắc chữ Z. Người pha chế có thể vẫn đang theo dõi chúng ta.",
+        "triggerProgress": 0.48
+      },
+      "finale": {
+        "id": "man-04-cuoi",
+        "title": "Kẻ trị thương sai lệch",
+        "speaker": "Đài Chỉ Huy",
+        "text": "Kẻ tinh anh đang hồi phục cả bầy bằng độc chất. Cắt đứt vòng truyền dẫn của nó.",
+        "kind": "elite"
+      },
+      "victory": {
+        "id": "man-04-thang",
+        "title": "Người thợ rèn đáp lời",
+        "speaker": "Toren",
+        "text": "Tôi nhận ra bình chứa này. Mang mẫu độc tới Cồn Cát Vỡ Nát; tôi sẽ nhập đội và giúp giữ Mảnh Ấn."
+      },
+      "codexUnlockIds": ["doc-cam-vong", "thanh-dien-dam-doc"]
+    },
+    {
+      "stageId": "sundered-dunes",
+      "actId": "mo-neo-ran-vo",
+      "synopsis": "Mảnh Ấn đầu tiên nằm trong bụng Kẻ Nuốt Hư Không dưới biển cát.",
+      "objectives": ["Sống sót qua 5 đợt", "Xác định nhịp của Mảnh Ấn", "Hạ Kẻ Nuốt Hư Không"],
+      "prelude": {
+        "id": "man-05-dan",
+        "title": "Nhịp đập dưới cát",
+        "speaker": "Đài Chỉ Huy",
+        "text": "Bốn trụ cát cùng rung theo một nhịp. Thứ bên dưới đã nuốt Mảnh Ấn của Kết Giới."
+      },
+      "midStage": {
+        "id": "man-05-giua",
+        "title": "Bẫy săn Hộ Vệ",
+        "speaker": "Mira",
+        "text": "Đàn quái đang dồn ta vào tâm cồn cát. Nó biết chính xác đội hình Hộ Vệ chiến đấu thế nào.",
+        "triggerProgress": 0.50
+      },
+      "finale": {
+        "id": "man-05-cuoi",
+        "title": "Kẻ Nuốt Hư Không",
+        "speaker": "Kael",
+        "text": "Mảnh Ấn đang sáng trong lồng ngực nó. Hạ quái vật, nhưng đừng phá vỡ mảnh ấy.",
+        "kind": "boss"
+      },
+      "victory": {
+        "id": "man-05-thang",
+        "title": "Mảnh Ấn chỉ đường",
+        "speaker": "Toren",
+        "text": "Nhịp trong mảnh này khớp Tháp Băng Giá. Tôi biết một lối bảo trì có thể đưa cả đội lên đỉnh."
+      },
+      "codexUnlockIds": ["bon-manh-an", "ke-nuot-hu-khong"]
+    },
+    {
+      "stageId": "frostspire",
+      "actId": "mo-neo-ran-vo",
+      "synopsis": "Toren gia nhập cuộc truy tìm và phát hiện người canh tháp bị đóng băng từ bên trong.",
+      "objectives": ["Sống sót qua 5 đợt", "Mở đường lên đỉnh tháp", "Hạ kẻ tinh anh phá khóa băng"],
+      "prelude": {
+        "id": "man-06-dan",
+        "title": "Cuộc hẹn trên tháp",
+        "speaker": "Toren",
+        "text": "Tôi không lấy trộm bản thiết kế. Hãy lên đỉnh tháp, tôi sẽ chứng minh bằng chính Mảnh Ấn."
+      },
+      "midStage": {
+        "id": "man-06-giua",
+        "title": "Những người gác đông cứng",
+        "speaker": "Toren",
+        "text": "Họ quay vũ khí xuống nền tháp trước khi bị đóng băng. Mối nguy thật sự đi từ bên dưới."
+        ,"triggerProgress": 0.45
+      },
+      "finale": {
+        "id": "man-06-cuoi",
+        "title": "Khóa băng bị đánh thức",
+        "speaker": "Mira",
+        "text": "Kẻ tinh anh đang phá khóa băng. Giữ nó xa cột trụ trung tâm.",
+        "kind": "elite"
+      },
+      "victory": {
+        "id": "man-06-thang",
+        "title": "Tên của người canh",
+        "speaker": "Toren",
+        "text": "Nữ Hoàng Băng Giá đã tự phong ấn mình để giữ cửa. Chúng ta phải tìm ai đã xiềng bà ấy."
+      },
+      "codexUnlockIds": ["thap-bang-gia"]
+    },
+    {
+      "stageId": "grave-bloom",
+      "actId": "mo-neo-ran-vo",
+      "synopsis": "Hoa mộ lưu giữ lời khai của những Hộ Vệ đã bị xóa khỏi sử sách.",
+      "objectives": ["Sống sót qua 5 đợt", "Bảo toàn lời khai trong hoa mộ", "Hạ kẻ tinh anh ăn ký ức"],
+      "prelude": {
+        "id": "man-07-dan",
+        "title": "Khu vườn nhớ tên",
+        "speaker": "Mira",
+        "text": "Mỗi bông hoa mang một ký ức. Đừng giẫm lên chúng, người chết đang cố làm chứng."
+      },
+      "midStage": {
+        "id": "man-07-giua",
+        "title": "Danh hiệu bị xóa",
+        "speaker": "Tiếng Vọng",
+        "text": "Aster Infernus từng là Tổng Hộ Vệ, không phải bạo chúa. Hội Đồng đã xóa tên ông khỏi bia đá.",
+        "triggerProgress": 0.47
+      },
+      "finale": {
+        "id": "man-07-cuoi",
+        "title": "Bầy quái ăn ký ức",
+        "speaker": "Toren",
+        "text": "Kẻ tinh anh đang nuốt những bông hoa. Hạ nó trước khi lời khai biến mất lần nữa.",
+        "kind": "elite"
+      },
+      "victory": {
+        "id": "man-07-thang",
+        "title": "Lời nhắn của Elara",
+        "speaker": "Tiếng Vọng",
+        "text": "Hãy tìm Elara Quill trong Thành Trì Hắc Ám. Chỉ cô ấy nghe được phần ký ức còn thiếu."
+      },
+      "codexUnlockIds": ["aster-infernus", "vuon-mo-no-hoa"]
+    },
+    {
+      "stageId": "iron-citadel",
+      "actId": "bao-hu-khong",
+      "synopsis": "Toren đối mặt với cỗ máy chiến tranh được dựng từ thiết kế cứu hộ của mình.",
+      "objectives": ["Sống sót qua 5 đợt", "Khóa dây chuyền chiến cụ", "Hạ kẻ tinh anh chiếm lò rèn"],
+      "prelude": {
+        "id": "man-08-dan",
+        "title": "Bản thiết kế bị bẻ cong",
+        "speaker": "Toren",
+        "text": "Tôi tạo khung máy để kéo dân khỏi vùng sập. Ai đó đã thay càng cứu hộ bằng pháo vây thành."
+      },
+      "midStage": {
+        "id": "man-08-giua",
+        "title": "Mệnh lệnh dưới thép",
+        "speaker": "Mira",
+        "text": "Hồ sơ cho thấy Cự Thú Sắt Thép đang được chuyển xuống Địa Tầng Sâu để bảo vệ một ký ức."
+        ,"triggerProgress": 0.43
+      },
+      "finale": {
+        "id": "man-08-cuoi",
+        "title": "Lò rèn phản chủ",
+        "speaker": "Toren",
+        "text": "Khóa áp suất đã mở. Đánh sập kẻ tinh anh trước khi toàn bộ dây chuyền thức dậy.",
+        "kind": "elite"
+      },
+      "victory": {
+        "id": "man-08-thang",
+        "title": "Nhà nguyên tố học đáp lời",
+        "speaker": "Nyra",
+        "text": "Tôi đã giải được khóa lò rèn từ xa. Cho tôi nhập đội; Lõi Than Hồng là sai lầm tôi phải trực tiếp sửa."
+      },
+      "codexUnlockIds": ["thanh-tri-sat"]
+    },
+    {
+      "stageId": "ember-core",
+      "actId": "bao-hu-khong",
+      "synopsis": "Nyra giữ Lõi Than Hồng khỏi nổ và thú nhận phương trình của mình đã mở đường cho thảm họa.",
+      "objectives": ["Sống sót qua 5 đợt", "Ổn định Lõi Than Hồng", "Hạ kẻ tinh anh bám bộ điều áp"],
+      "prelude": {
+        "id": "man-09-dan",
+        "title": "Nhà nghiên cứu trong tâm lửa",
+        "speaker": "Nyra",
+        "text": "Tôi có thể giữ lõi ổn định ba phút. Nếu đến trễ, cả vùng sẽ thành nhiên liệu cho Khe Nứt."
+      },
+      "midStage": {
+        "id": "man-09-giua",
+        "title": "Phương trình đảo chiều",
+        "speaker": "Nyra",
+        "text": "Infernus đã đảo công thức cộng hưởng của tôi: thay vì vá Kết Giới, nó hút ký ức để mở rộng vết thương."
+        ,"triggerProgress": 0.49
+      },
+      "finale": {
+        "id": "man-09-cuoi",
+        "title": "Lõi sắp quá tải",
+        "speaker": "Đài Chỉ Huy",
+        "text": "Kẻ tinh anh đã bám vào bộ điều áp. Tách nó khỏi lõi ngay lập tức.",
+        "kind": "elite"
+      },
+      "victory": {
+        "id": "man-09-thang",
+        "title": "Sai lầm có thể sửa",
+        "speaker": "Nyra",
+        "text": "Tôi sẽ đi cùng. Chính phương trình đã mở đường xuống sâu, và tôi là người hiểu cách đóng nó."
+      },
+      "codexUnlockIds": ["loi-than-hong"]
+    },
+    {
+      "stageId": "deep-strata",
+      "actId": "bao-hu-khong",
+      "synopsis": "Cự Thú Sắt Thép bảo vệ hồ sơ chứng minh Hội Đồng từng ra lệnh vũ khí hóa Khe Nứt.",
+      "objectives": ["Sống sót qua 6 đợt", "Thu hồi lệnh có bảy con dấu", "Hạ Cự Thú Sắt Thép"],
+      "prelude": {
+        "id": "man-10-dan",
+        "title": "Xuống nơi không có ánh sáng",
+        "speaker": "Toren",
+        "text": "Cự Thú nằm dưới tầng đá cuối. Nó nhận giọng tôi là chủ, nhưng mệnh lệnh cũ đã khóa quyền điều khiển."
+      },
+      "midStage": {
+        "id": "man-10-giua",
+        "title": "Con dấu của Hội Đồng",
+        "speaker": "Mira",
+        "text": "Lệnh vũ khí hóa Khe Nứt có đủ bảy con dấu. Infernus chống lệnh chỉ sau khi thành phố đầu tiên biến mất."
+        ,"triggerProgress": 0.50
+      },
+      "finale": {
+        "id": "man-10-cuoi",
+        "title": "Cự Thú Sắt Thép",
+        "speaker": "Toren",
+        "text": "Tôi đã tạo đôi chân cho ngươi cứu người, không phải nghiền nát họ. Dừng lại đi."
+        ,"kind": "boss"
+      },
+      "victory": {
+        "id": "man-10-thang",
+        "title": "Tội lỗi được chia đều",
+        "speaker": "Kael",
+        "text": "Infernus không vô tội, nhưng Hội Đồng đã châm ngòi. Chúng ta cần toàn bộ sự thật trước khi phán xét."
+      },
+      "codexUnlockIds": ["cu-thu-sat-thep", "hoi-dong-luu-quang", "lenh-vu-khi-hoa"]
+    },
+    {
+      "stageId": "crystal-arc",
+      "actId": "bao-hu-khong",
+      "synopsis": "Một giọng nói trẻ tuổi phát ra từ tương lai bị giam trong Vòm Pha Lê.",
+      "objectives": ["Sống sót qua 6 đợt", "Giữ các tinh thể tín hiệu", "Hạ kẻ tinh anh gây quá tải"],
+      "prelude": {
+        "id": "man-11-dan",
+        "title": "Tín hiệu chưa từng sinh ra",
+        "speaker": "Nyra",
+        "text": "Tinh thể phát một giọng nói không khớp bất kỳ người sống nào, nhưng nó biết tên cả đội."
+      },
+      "midStage": {
+        "id": "man-11-giua",
+        "title": "Lời gọi của Nova",
+        "speaker": "Giọng Lạ",
+        "text": "Đừng đóng Khe Nứt bằng cách cũ. Nếu các người làm vậy, tôi sẽ không bao giờ được sinh ra."
+        ,"triggerProgress": 0.46
+      },
+      "finale": {
+        "id": "man-11-cuoi",
+        "title": "Sét xóa dấu vết",
+        "speaker": "Nyra",
+        "text": "Kẻ tinh anh đang làm quá tải vòm để xóa tín hiệu. Giữ các tinh thể còn nguyên."
+        ,"kind": "elite"
+      },
+      "victory": {
+        "id": "man-11-thang",
+        "title": "Một cái tên và một người dẫn đường",
+        "speaker": "Zarek",
+        "text": "Giọng nói tự gọi mình là Nova Lys. Tôi biết tín hiệu ấy đi qua đâu; gặp tôi tại lối vào Phòng Thí Nghiệm Xanh."
+      },
+      "codexUnlockIds": ["vom-pha-le", "giong-noi-nova"]
+    },
+    {
+      "stageId": "verdant-lab",
+      "actId": "bao-hu-khong",
+      "synopsis": "Zarek bảo vệ phương thuốc giữ ký ức khỏi đội quân do chính phòng thí nghiệm tạo ra.",
+      "objectives": ["Sống sót qua 6 đợt", "Bảo vệ bình thuốc màu lam", "Hạ kẻ tinh anh uống chất gốc"],
+      "prelude": {
+        "id": "man-12-dan",
+        "title": "Khu vườn trong ống nghiệm",
+        "speaker": "Zarek",
+        "text": "Nếu các người muốn sống sót qua độc câm vọng, hãy cứu bình thuốc màu lam trước rồi mới cứu tôi."
+      },
+      "midStage": {
+        "id": "man-12-giua",
+        "title": "Kẻ phản bội đúng lúc",
+        "speaker": "Zarek",
+        "text": "Tôi từng pha độc cho Hội Đồng. Khi hiểu nó xóa con người mà giữ lại cơ thể, tôi đã phá toàn bộ dây chuyền."
+        ,"triggerProgress": 0.48
+      },
+      "finale": {
+        "id": "man-12-cuoi",
+        "title": "Mẻ độc cuối cùng",
+        "speaker": "Zarek",
+        "text": "Kẻ tinh anh đang uống chất gốc. Đừng để máu nó chạm vào bình giải dược."
+        ,"kind": "elite"
+      },
+      "victory": {
+        "id": "man-12-thang",
+        "title": "Lời thề của nhà độc học",
+        "speaker": "Zarek",
+        "text": "Tôi không xin được tha thứ. Tôi chỉ xin cơ hội bảo đảm chất độc này không còn cướp tên của ai."
+      },
+      "codexUnlockIds": ["phong-thi-nghiem-xanh"]
+    },
+    {
+      "stageId": "clockwork-bastion",
+      "actId": "bao-hu-khong",
+      "synopsis": "Pháo đài lưu hồ sơ về bốn Mảnh Ấn và một vệ binh cổ mang mã hiệu Rho.",
+      "objectives": ["Sống sót qua 6 đợt", "Giải mã hồ sơ Rho", "Hạ kẻ tinh anh chiếm trục chính"],
+      "prelude": {
+        "id": "man-13-dan",
+        "title": "Kho lưu trữ biết tự vệ",
+        "speaker": "Mira",
+        "text": "Pháo đài khóa mọi cánh cửa theo nhịp bánh răng. Tôi cần đường đi, Toren cần giữ chúng còn quay."
+      },
+      "midStage": {
+        "id": "man-13-giua",
+        "title": "Vệ binh mã hiệu Rho",
+        "speaker": "Toren",
+        "text": "Hồ sơ nhắc tới Titan Rho, cỗ giáp cổ bảo vệ Trái Tim Khe Nứt. Tín hiệu của anh ta vẫn còn."
+        ,"triggerProgress": 0.45
+      },
+      "finale": {
+        "id": "man-13-cuoi",
+        "title": "Bánh răng phán quyết",
+        "speaker": "Đài Chỉ Huy",
+        "text": "Kẻ tinh anh đã chiếm trục chính. Hạ nó trước khi kho lưu trữ tự nghiền nát."
+        ,"kind": "elite"
+      },
+      "victory": {
+        "id": "man-13-thang",
+        "title": "Người Chăn Vọng Âm tự do",
+        "speaker": "Elara",
+        "text": "Khóa nhà tù vừa tắt và tôi đã thoát. Cho tôi nhập đội; những linh hồn còn lại đang chỉ tới Mảnh Ấn cuối."
+      },
+      "codexUnlockIds": ["phao-dai-co-gioi"]
+    },
+    {
+      "stageId": "dark-citadel",
+      "actId": "bao-hu-khong",
+      "synopsis": "Elara trở lại nhà tù vừa thoát khỏi để giải phóng những linh hồn còn bị biến thành binh lính.",
+      "objectives": ["Sống sót qua 6 đợt", "Giải phóng tiếng vọng bị xiềng", "Hạ cai ngục tinh anh"],
+      "prelude": {
+        "id": "man-14-dan",
+        "title": "Thành trì của tiếng khóc",
+        "speaker": "Tiếng Vọng",
+        "text": "Elara đã thoát nhờ khóa cơ giới vừa mở. Cô ấy dẫn đường trở lại tháp chuông để cứu những linh hồn còn bị giữ."
+      },
+      "midStage": {
+        "id": "man-14-giua",
+        "title": "Người chăn không bỏ đàn",
+        "speaker": "Elara",
+        "text": "Đừng phá chuông. Hãy đánh theo nhịp của tôi; mỗi nhịp đúng sẽ giải phóng một tiếng vọng."
+        ,"triggerProgress": 0.47
+      },
+      "finale": {
+        "id": "man-14-cuoi",
+        "title": "Cai ngục của người chết",
+        "speaker": "Elara",
+        "text": "Kẻ tinh anh giữ chìa khóa xiềng hồn. Hạ nó, tôi sẽ dẫn những người còn lại ra ngoài."
+        ,"kind": "elite"
+      },
+      "victory": {
+        "id": "man-14-thang",
+        "title": "Con đường lên trời",
+        "speaker": "Elara",
+        "text": "Nữ Hoàng chưa phản bội. Một mệnh lệnh giả đang thiêu cháy bà từ trong băng."
+      },
+      "codexUnlockIds": ["thanh-tri-hac-am"]
+    },
+    {
+      "stageId": "sky-temple",
+      "actId": "trai-tim-hon-mang",
+      "synopsis": "Đội Hộ Vệ phải phá xiềng mà không giết Nữ Hoàng Băng Giá đang bảo vệ Mảnh Ấn cuối.",
+      "objectives": ["Sống sót qua 7 đợt", "Phá bốn cột lệnh", "Giải thoát Nữ Hoàng Băng Giá"],
+      "prelude": {
+        "id": "man-15-dan",
+        "title": "Đừng giết người canh cửa",
+        "speaker": "Elara",
+        "text": "Bà ấy sẽ tấn công, nhưng đó là xiềng xích điều khiển. Hãy đánh vào bốn cột lệnh quanh điện."
+      },
+      "midStage": {
+        "id": "man-15-giua",
+        "title": "Giọng nói dưới băng",
+        "speaker": "Nữ Hoàng Băng Giá",
+        "text": "Ta còn nghe thấy các ngươi. Phá vương miện trước khi mệnh lệnh bắt ta đóng băng cả bầu trời."
+        ,"triggerProgress": 0.50
+      },
+      "finale": {
+        "id": "man-15-cuoi",
+        "title": "Nữ Hoàng Băng Giá",
+        "speaker": "Kael",
+        "text": "Không nhắm vào trái tim bà ấy. Chúng ta đến để giải thoát một Hộ Vệ, không tạo thêm mộ."
+        ,"kind": "boss"
+      },
+      "victory": {
+        "id": "man-15-thang",
+        "title": "Bí mật của Trái Tim",
+        "speaker": "Nữ Hoàng Băng Giá",
+        "text": "Nova là linh hồn đang thành hình trong Khe Nứt. Nghi thức cũ sẽ dùng cô bé thay cho bốn Mảnh Ấn."
+      },
+      "codexUnlockIds": ["nu-hoang-bang-gia", "nghi-thuc-trai-tim"]
+    },
+    {
+      "stageId": "chaos-gate",
+      "actId": "trai-tim-hon-mang",
+      "synopsis": "Bốn Mảnh Ấn mở đường vào Khe Nứt, đồng thời cho Infernus cơ hội đưa ra một thỏa thuận.",
+      "objectives": ["Sống sót qua 7 đợt", "Giữ ký ức thật trước ảo cảnh", "Hạ người gác cổng tinh anh"],
+      "prelude": {
+        "id": "man-16-dan",
+        "title": "Cánh cửa mở vào trong",
+        "speaker": "Nyra",
+        "text": "Gắn bốn Mảnh Ấn sẽ mở đường, không đóng vết nứt. Một khi bước qua, không còn tín hiệu từ Đài Chỉ Huy."
+      },
+      "midStage": {
+        "id": "man-16-giua",
+        "title": "Lời đề nghị của Infernus",
+        "speaker": "Infernus",
+        "text": "Trao Nova cho ta, mọi thành phố đã mất sẽ trở lại. Các ngươi chỉ phải quên một người chưa từng sống."
+        ,"triggerProgress": 0.45
+      },
+      "finale": {
+        "id": "man-16-cuoi",
+        "title": "Người gác cổng hỗn mang",
+        "speaker": "Mira",
+        "text": "Kẻ tinh anh khóa cửa bằng ký ức của chúng ta. Hãy giữ lấy điều thật và phá bản sao."
+        ,"kind": "elite"
+      },
+      "victory": {
+        "id": "man-16-thang",
+        "title": "Vệ binh thức dậy",
+        "speaker": "Titan",
+        "text": "Tín hiệu Rho đã phục hồi. Tôi chấp nhận mệnh lệnh của chính mình: không để bất kỳ sinh mạng nào thành vật hi sinh."
+      },
+      "codexUnlockIds": ["cong-hon-mang", "giao-uoc-cua-infernus"]
+    },
+    {
+      "stageId": "void-march",
+      "actId": "trai-tim-hon-mang",
+      "synopsis": "Giữa đoàn quân Hư Không, Titan Rho thức dậy và nhớ lại mệnh lệnh thật sự của mình.",
+      "objectives": ["Sống sót qua 7 đợt", "Bẻ khóa điều khiển Titan", "Hạ kẻ tinh anh giữ lõi lệnh"],
+      "prelude": {
+        "id": "man-17-dan",
+        "title": "Đội quân không có bóng",
+        "speaker": "Mira",
+        "text": "Chúng không tiến về phía ta; chúng đang hộ tống một cỗ giáp khổng lồ tới Trái Tim."
+      },
+      "midStage": {
+        "id": "man-17-giua",
+        "title": "Mệnh lệnh thứ nhất",
+        "speaker": "Titan",
+        "text": "Tôi đã nhớ mệnh lệnh gốc: bảo vệ mọi sinh mạng, kể cả sinh mạng chưa có tên. Lệnh giả không còn điều khiển tôi."
+        ,"triggerProgress": 0.48
+      },
+      "finale": {
+        "id": "man-17-cuoi",
+        "title": "Bẻ gãy lệnh giả",
+        "speaker": "Toren",
+        "text": "Kẻ tinh anh giữ khóa điều khiển Titan. Tôi mở giáp, các cậu phá lõi lệnh."
+        ,"kind": "elite"
+      },
+      "victory": {
+        "id": "man-17-thang",
+        "title": "Vệ binh trở về",
+        "speaker": "Titan",
+        "text": "Xác nhận Nova là sinh mạng. Tôi sẽ mở đường và đứng chắn giữa cô ấy với nghi thức."
+      },
+      "codexUnlockIds": ["cuoc-hanh-quan-hu-khong"]
+    },
+    {
+      "stageId": "final-realm",
+      "actId": "trai-tim-hon-mang",
+      "synopsis": "Khe Nứt dựng lại nỗi hối tiếc của từng Hộ Vệ để buộc họ quay về.",
+      "objectives": ["Sống sót qua 7 đợt", "Phân biệt ký ức thật và giả", "Hạ bản sao tinh anh"],
+      "prelude": {
+        "id": "man-18-dan",
+        "title": "Cõi được dệt từ hối tiếc",
+        "speaker": "Elara",
+        "text": "Mọi cảnh vật ở đây đều là ký ức. Hãy nghe nhau; ký ức giả không thể trả lời điều chưa từng xảy ra."
+      },
+      "midStage": {
+        "id": "man-18-giua",
+        "title": "Những con đường quay về",
+        "speaker": "Nova",
+        "text": "Nó đang cho mỗi người thấy điều mình muốn nhất. Xin đừng chọn giấc mơ nếu cái giá là người bên cạnh."
+        ,"triggerProgress": 0.46
+      },
+      "finale": {
+        "id": "man-18-cuoi",
+        "title": "Bản sao hoàn hảo",
+        "speaker": "Zarek",
+        "text": "Kẻ tinh anh bắt chước cả vết thương lẫn giọng nói. Hãy nhìn bóng của nó; đồ giả không có bóng."
+        ,"kind": "elite"
+      },
+      "victory": {
+        "id": "man-18-thang",
+        "title": "Lời hứa với người chưa gặp",
+        "speaker": "Kael",
+        "text": "Nova, hãy tiếp tục gọi. Chúng tôi sẽ đến Trái Tim và đưa cô ra bằng chính tên của cô."
+      },
+      "codexUnlockIds": ["coi-cuoi", "ky-uc-gia"]
+    },
+    {
+      "stageId": "rift-heart",
+      "actId": "trai-tim-hon-mang",
+      "synopsis": "Đội Hộ Vệ tìm ra cách hòa nhịp Kết Giới mà không hi sinh Nova hay phá hủy Khe Nứt.",
+      "objectives": ["Sống sót qua 7 đợt", "Giải phóng bốn sợi xích", "Hạ vệ binh nghi thức cũ"],
+      "prelude": {
+        "id": "man-19-dan",
+        "title": "Trái Tim có tên",
+        "speaker": "Nova",
+        "text": "Tôi ở giữa căn phòng sáng nhất. Xin đừng chạm vào bốn sợi xích; chúng đang giữ ký ức của các thành phố."
+      },
+      "midStage": {
+        "id": "man-19-giua",
+        "title": "Lựa chọn thứ ba",
+        "speaker": "Nyra",
+        "text": "Không cần đóng hay mở Khe Nứt. Nếu tám nhịp cộng hưởng đồng thời, ta có thể biến nó thành một cây cầu."
+        ,"triggerProgress": 0.50
+      },
+      "finale": {
+        "id": "man-19-cuoi",
+        "title": "Vệ binh của nghi thức cũ",
+        "speaker": "Titan",
+        "text": "Kẻ tinh anh bảo vệ sợi xích cuối. Tôi sẽ chặn phản lực; mọi người hãy giải phóng Nova."
+        ,"kind": "elite"
+      },
+      "victory": {
+        "id": "man-19-thang",
+        "title": "Tám nhịp, một ý chí",
+        "speaker": "Nova",
+        "text": "Tôi đã có thể cảm nhận bàn tay mình. Chỉ còn Infernus đứng giữa chúng ta và bình minh."
+      },
+      "codexUnlockIds": ["trai-tim-khe-nut", "ke-hoach-hoa-nhip"]
+    },
+    {
+      "stageId": "eternal-siege",
+      "actId": "trai-tim-hon-mang",
+      "synopsis": "Tám Hộ Vệ giữ các điểm cộng hưởng và đối mặt với người từng muốn cứu thế giới bằng sự cưỡng ép.",
+      "objectives": ["Sống sót qua 8 đợt", "Giữ ba trụ cộng hưởng", "Hạ Chúa Tể Hỏa Ngục"],
+      "prelude": {
+        "id": "man-20-dan",
+        "title": "Cuộc vây hãm cuối",
+        "speaker": "Kael",
+        "text": "Giữ ba trụ cộng hưởng. Khi Nova đếm đến tám, dồn toàn bộ sức mạnh vào nhịp của cô ấy."
+      },
+      "midStage": {
+        "id": "man-20-giua",
+        "title": "Lý tưởng đã hóa thành xiềng",
+        "speaker": "Infernus",
+        "text": "Ta từng cầu xin Hội Đồng cứu họ. Khi họ từ chối, ta thề sẽ không bao giờ để ai được quyền từ chối nữa."
+        ,"triggerProgress": 0.52
+      },
+      "finale": {
+        "id": "man-20-cuoi",
+        "title": "Chúa Tể Hỏa Ngục",
+        "speaker": "Nova",
+        "text": "Ông muốn cứu mọi người nhưng đã lấy mất quyền lựa chọn của họ. Tôi sẽ không trở thành chiếc khóa của ông."
+        ,"kind": "boss"
+      },
+      "victory": {
+        "id": "man-20-thang",
+        "title": "Nhịp thứ tám",
+        "speaker": "Cả Đội",
+        "text": "Không ai bị bỏ lại. Không ký ức nào bị xiềng xích. Hãy mở đường về nhà."
+      },
+      "codexUnlockIds": ["cuoc-vay-ham-vinh-hang"]
+    }
+  ],
+  "characters": [
+    {
+      "characterId": "kael-orin",
+      "name": "Kael Orin",
+      "recruitedAfterStageId": null,
+      "motivation": "Bảo vệ dân thường và chứng minh danh hiệu Hộ Vệ là một lựa chọn mỗi ngày, không phải huyết thống.",
+      "innerConflict": "Kael sợ mình chỉ đang lặp lại những mệnh lệnh từng biến Infernus thành bạo chúa.",
+      "arc": "Anh học cách bảo vệ quyền lựa chọn của người khác thay vì quyết định thay họ.",
+      "battleCry": "Giữ đội hình. Chúng ta cùng trở về.",
+      "relationshipIds": ["kael-mira", "kael-toren", "kael-nova", "kael-titan"]
+    },
+    {
+      "characterId": "mira-voss",
+      "name": "Mira Voss",
+      "recruitedAfterStageId": "glassward-verge",
+      "motivation": "Vẽ lại bản đồ những vùng bị xóa để người sống tìm được đường về và người chết không bị lãng quên.",
+      "innerConflict": "Mira tin vào dữ liệu hơn con người vì đoàn thám sát cũ đã bỏ cô lại trong hang.",
+      "arc": "Cô biến bản đồ từ công cụ kiểm soát thành lời hứa không để đồng đội lạc mất nhau.",
+      "battleCry": "Tôi thấy đường rồi. Theo mũi tên bạc.",
+      "relationshipIds": ["kael-mira", "mira-elara", "mira-zarek"]
+    },
+    {
+      "characterId": "toren-vale",
+      "name": "Toren Vale",
+      "recruitedAfterStageId": "mire-sanctum",
+      "motivation": "Phá hủy các vũ khí sinh ra từ thiết kế cứu hộ của mình và dựng lại lò rèn để phục vụ sự sống.",
+      "innerConflict": "Ông nhận mọi hậu quả của bản thiết kế là lỗi cá nhân, kể cả khi nó bị người khác cố ý bẻ cong.",
+      "arc": "Toren chấp nhận trách nhiệm mà không tự kết án, rồi dùng kỹ nghệ để giải phóng Titan.",
+      "battleCry": "Đứng sau khiên. Búa này sửa được cả sai lầm.",
+      "relationshipIds": ["kael-toren", "toren-nyra", "toren-titan"]
+    },
+    {
+      "characterId": "nyra-sol",
+      "name": "Nyra Sol",
+      "recruitedAfterStageId": "iron-citadel",
+      "motivation": "Đảo ngược phương trình cộng hưởng đã bị lợi dụng và chứng minh tri thức phải đi cùng trách nhiệm.",
+      "innerConflict": "Nyra che giấu sai lầm trong công thức vì sợ cả đội sẽ không còn tin phán đoán của cô.",
+      "arc": "Cô công khai thất bại, lắng nghe đồng đội và tìm ra lựa chọn thứ ba để cứu Nova.",
+      "battleCry": "Bốn nguyên tố, một nhịp. Đừng phá đội hình.",
+      "relationshipIds": ["toren-nyra", "nyra-zarek", "nyra-nova"]
+    },
+    {
+      "characterId": "zarek",
+      "name": "Zarek Venn",
+      "recruitedAfterStageId": "crystal-arc",
+      "motivation": "Xóa sạch độc câm vọng do mình từng giúp tạo ra và trả lại ký ức cho những nạn nhân còn sống.",
+      "innerConflict": "Zarek cho rằng sự hữu ích là thứ duy nhất giúp mình xứng đáng ở lại với đội.",
+      "arc": "Anh thôi tìm kiếm sự tha thứ tức thời và chọn kiên trì sửa chữa hậu quả bằng hành động.",
+      "battleCry": "Đừng chạm vũng xanh. Phần còn lại cứ để tôi.",
+      "relationshipIds": ["mira-zarek", "nyra-zarek", "zarek-elara"]
+    },
+    {
+      "characterId": "elara",
+      "name": "Elara Quill",
+      "recruitedAfterStageId": "clockwork-bastion",
+      "motivation": "Giải phóng tiếng vọng của người chết để họ được nhớ đến như con người, không phải nguồn năng lượng.",
+      "innerConflict": "Elara nghe quá nhiều lời cầu cứu và sợ việc chọn cứu ai trước cũng là một hành động phản bội.",
+      "arc": "Cô học cách chia sẻ gánh nặng với người sống và dẫn các linh hồn tự chọn con đường của mình.",
+      "battleCry": "Hãy nghe kỹ. Những tiếng vọng đang chỉ lối.",
+      "relationshipIds": ["mira-elara", "zarek-elara", "elara-nova"]
+    },
+    {
+      "characterId": "titan",
+      "name": "Titan Rho",
+      "recruitedAfterStageId": "chaos-gate",
+      "motivation": "Hoàn thành mệnh lệnh gốc: bảo vệ mọi sinh mạng có ý chí, kể cả người chưa có hình hài.",
+      "innerConflict": "Titan không biết ký ức của mình là trải nghiệm thật hay chuỗi lệnh được viết để tạo cảm giác làm người.",
+      "arc": "Anh tự đưa ra mệnh lệnh đầu tiên cho chính mình và chọn bảo vệ Nova như một người bạn.",
+      "battleCry": "Mệnh lệnh mới: không ai phải đứng một mình.",
+      "relationshipIds": ["toren-titan", "titan-nova", "kael-titan"]
+    },
+    {
+      "characterId": "nova",
+      "name": "Nova Lys",
+      "recruitedAfterStageId": "rift-heart",
+      "motivation": "Được sống với tên và lựa chọn của riêng mình thay vì trở thành công cụ khóa hoặc mở Khe Nứt.",
+      "innerConflict": "Nova sợ thế giới chỉ cứu cô vì sức mạnh, không phải vì xem cô là một con người.",
+      "arc": "Cô trở thành nhịp thứ tám của đội, biến Khe Nứt thành cây cầu mà không đánh mất bản thân.",
+      "battleCry": "Tôi có tên. Tôi có lựa chọn. Và tôi ở đây.",
+      "relationshipIds": ["kael-nova", "nyra-nova", "elara-nova", "titan-nova"]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "kael-mira",
+      "characters": ["kael-orin", "mira-voss"],
+      "title": "La bàn và thanh kiếm",
+      "description": "Mira tìm đường, Kael giữ đường; họ tranh luận thường xuyên nhưng luôn là người đầu tiên quay lại tìm nhau."
+    },
+    {
+      "id": "kael-toren",
+      "characters": ["kael-orin", "toren-vale"],
+      "title": "Người thầy không nhận học trò",
+      "description": "Toren rèn kiếm cho Kael và dạy anh rằng một Hộ Vệ tốt phải biết lúc nào nên hạ vũ khí."
+    },
+    {
+      "id": "kael-nova",
+      "characters": ["kael-orin", "nova"],
+      "title": "Lời hứa với người chưa gặp",
+      "description": "Kael tin Nova là con người từ trước khi thấy cô; Nova giúp anh hiểu bảo vệ khác với sở hữu."
+    },
+    {
+      "id": "mira-elara",
+      "characters": ["mira-voss", "elara"],
+      "title": "Bản đồ của hai thế giới",
+      "description": "Mira ghi tọa độ của người sống, Elara nghe đường đi của người chết; cùng nhau họ vẽ bản đồ không bỏ sót ai."
+    },
+    {
+      "id": "mira-zarek",
+      "characters": ["mira-voss", "zarek"],
+      "title": "Niềm tin có điều kiện",
+      "description": "Mira từng truy dấu phòng thí nghiệm của Zarek; cô không quên tội cũ nhưng công nhận mọi lần anh chọn cứu người."
+    },
+    {
+      "id": "toren-nyra",
+      "characters": ["toren-vale", "nyra-sol"],
+      "title": "Cỗ máy và phương trình",
+      "description": "Toren kiểm tra giới hạn vật chất trong ý tưởng của Nyra; Nyra giúp máy của ông thích nghi thay vì chỉ chịu đựng."
+    },
+    {
+      "id": "toren-titan",
+      "characters": ["toren-vale", "titan"],
+      "title": "Người sửa giáp, người tự sửa mình",
+      "description": "Toren phục hồi thân thể Titan nhưng từ chối viết lại ký ức, để Titan tự quyết định mình là ai."
+    },
+    {
+      "id": "nyra-zarek",
+      "characters": ["nyra-sol", "zarek"],
+      "title": "Hai mặt của giả kim",
+      "description": "Nyra và Zarek cùng gây ra hậu quả vì tri thức thiếu giới hạn; họ buộc nhau ghi lại cả thất bại lẫn thành công."
+    },
+    {
+      "id": "nyra-nova",
+      "characters": ["nyra-sol", "nova"],
+      "title": "Điều không nằm trong công thức",
+      "description": "Nyra nghiên cứu nguồn gốc của Nova nhưng luôn xin phép trước; Nova dạy cô rằng không phải điều gì cũng cần đo lường."
+    },
+    {
+      "id": "zarek-elara",
+      "characters": ["zarek", "elara"],
+      "title": "Thuốc cho ký ức",
+      "description": "Elara giúp Zarek nghe lời nạn nhân; Zarek tạo thuốc giữ tiếng vọng đủ lâu để họ nói lời cuối."
+    },
+    {
+      "id": "elara-nova",
+      "characters": ["elara", "nova"],
+      "title": "Tiếng vọng đầu tiên",
+      "description": "Elara là người đầu tiên nghe Nova và gọi cô là một đứa trẻ, không phải hiện tượng hay di vật."
+    },
+    {
+      "id": "titan-nova",
+      "characters": ["titan", "nova"],
+      "title": "Mệnh lệnh tự chọn",
+      "description": "Titan chọn bảo vệ Nova dù không còn lệnh điều khiển; Nova gọi anh bằng tên thay vì mã hiệu."
+    },
+    {
+      "id": "kael-titan",
+      "characters": ["kael-orin", "titan"],
+      "title": "Hai cách làm Hộ Vệ",
+      "description": "Kael hành động bằng lòng tin, Titan bằng nguyên tắc; cả hai học cách kết hợp bản năng với trách nhiệm."
+    }
+  ],
+  "codex": [
+    {
+      "id": "khe-nut",
+      "category": "thế-giới",
+      "title": "Khe Nứt",
+      "summary": "Một vết thương nối hiện tại với ký ức của những nơi đã mất.",
+      "body": "Khe Nứt không chỉ bẻ cong không gian. Nó phản hồi cảm xúc, ghi lại lựa chọn và có thể tạo ý chí mới từ tiếng vọng tích tụ.",
+      "unlock": {"kind": "khởi-đầu"}
+    },
+    {
+      "id": "ket-gioi-vong-am",
+      "category": "thế-giới",
+      "title": "Kết Giới Vọng Âm",
+      "summary": "Mạng Mỏ Neo cộng hưởng bảo vệ Cõi Lưu Quang khỏi Khe Nứt.",
+      "body": "Mỗi Mỏ Neo chia tải ký ức tự nguyện của nhiều thế hệ Hộ Vệ. Khi bị đảo chiều, mạng lưới hút ký ức sống và tạo binh lính không ý chí.",
+      "unlock": {"kind": "qua-màn", "targetId": "glassward-verge"}
+    },
+    {
+      "id": "dai-chi-huy-thuy-tinh",
+      "category": "phe-phái",
+      "title": "Đài Chỉ Huy Thủy Tinh",
+      "summary": "Trung tâm điều phối cuối cùng còn hoạt động của các Hộ Vệ.",
+      "body": "Đài không cai trị đội ngoài chiến trường. Nó giữ liên lạc, lưu lời khai và bảo đảm mọi mệnh lệnh nguy hiểm đều có thể bị chất vấn.",
+      "unlock": {"kind": "qua-màn", "targetId": "glassward-verge"}
+    },
+    {
+      "id": "hang-dong-vong-am",
+      "category": "địa-danh",
+      "title": "Hang Động Vọng Âm",
+      "summary": "Tinh thể nơi đây phát lại ký ức mạnh nhất của người đi qua.",
+      "body": "Các lối đi thay đổi theo nỗi sợ của khách lạ. Họa Đồ Sư dùng mũi tên đánh dấu thực tại để tránh bị ký ức dẫn vòng tròn.",
+      "unlock": {"kind": "qua-màn", "targetId": "echo-caverns"}
+    },
+    {
+      "id": "hoi-hoa-do-su",
+      "category": "phe-phái",
+      "title": "Hội Họa Đồ Sư",
+      "summary": "Những người vẽ đường đi qua vùng thực tại không ổn định.",
+      "body": "Họ không chỉ ghi địa hình mà còn ghi thời gian, ký ức và mức cộng hưởng. Mira là thành viên cuối cùng còn giữ trọn bộ bản đồ.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "mira-voss"}
+    },
+    {
+      "id": "phe-tich-tro-tan",
+      "category": "địa-danh",
+      "title": "Phế Tích Tro Tàn",
+      "summary": "Cụm lò rèn từng chế tạo các trụ bảo vệ đầu tiên.",
+      "body": "Sau cuộc thanh trừng, mọi hồ sơ bị đốt nhưng tro kim loại vẫn giữ dấu nhiệt và có thể tái dựng đường đi của kẻ phá hoại.",
+      "unlock": {"kind": "qua-màn", "targetId": "ashen-ruins"}
+    },
+    {
+      "id": "dau-bua-thanh-thuan",
+      "category": "di-vật",
+      "title": "Dấu Búa Thánh Thuẫn",
+      "summary": "Ấn riêng của Toren dùng để xác nhận thiết bị cứu hộ.",
+      "body": "Dấu thật có một nét lệch cố ý chỉ người trong lò rèn biết. Bản sao ở Phế Tích thiếu nét này và giúp minh oan cho Toren.",
+      "unlock": {"kind": "qua-màn", "targetId": "ashen-ruins"}
+    },
+    {
+      "id": "doc-cam-vong",
+      "category": "di-vật",
+      "title": "Độc Câm Vọng",
+      "summary": "Chất độc xóa ký ức nhưng giữ cơ thể tiếp tục hoạt động.",
+      "body": "Hội Đồng đặt hàng chất độc để tạo lực lượng tuyệt đối phục tùng. Zarek phá dây chuyền và dành nhiều năm điều chế thuốc phục hồi.",
+      "unlock": {"kind": "qua-màn", "targetId": "mire-sanctum"}
+    },
+    {
+      "id": "thanh-dien-dam-doc",
+      "category": "địa-danh",
+      "title": "Thánh Điện Đầm Độc",
+      "summary": "Nơi thử chất độc lên tiếng vọng trước khi dùng trên người sống.",
+      "body": "Những hồ nước xanh là bể chứa ký ức đã bị tách khỏi chủ nhân. Elara về sau giúp phần ký ức còn lại tìm được tên cũ.",
+      "unlock": {"kind": "qua-màn", "targetId": "mire-sanctum"}
+    },
+    {
+      "id": "bon-manh-an",
+      "category": "di-vật",
+      "title": "Bốn Mảnh Ấn",
+      "summary": "Bốn khóa điều chỉnh nhịp của Kết Giới Vọng Âm.",
+      "body": "Chúng không có quyền quyết định đóng hay mở Khe Nứt. Ý chí của người sử dụng mới định hình tác dụng cuối cùng.",
+      "unlock": {"kind": "qua-màn", "targetId": "sundered-dunes"}
+    },
+    {
+      "id": "ke-nuot-hu-khong",
+      "category": "kẻ-thù",
+      "title": "Kẻ Nuốt Hư Không",
+      "summary": "Quái vật lớn lên bằng cách nuốt di vật chứa ký ức.",
+      "body": "Nó không phục vụ Infernus vì trung thành mà vì cơn đói. Mảnh Ấn trong lồng ngực khiến nó học được chiến thuật của Hộ Vệ.",
+      "unlock": {"kind": "qua-màn", "targetId": "sundered-dunes"}
+    },
+    {
+      "id": "thap-bang-gia",
+      "category": "địa-danh",
+      "title": "Tháp Băng Giá",
+      "summary": "Khóa nhiệt giữ con đường lên Thiên Điện không bị thiêu rụi.",
+      "body": "Các người gác tự đóng băng mình khi nhận ra mệnh lệnh giả. Vũ khí quay xuống nền tháp là lời cảnh báo cuối cùng của họ.",
+      "unlock": {"kind": "qua-màn", "targetId": "frostspire"}
+    },
+    {
+      "id": "tho-ren-thanh-thuan",
+      "category": "phe-phái",
+      "title": "Thợ Rèn Thánh Thuẫn",
+      "summary": "Những kỹ sư đặt cứu hộ và phòng thủ lên trước vũ khí.",
+      "body": "Toren là trưởng lò cuối cùng. Quy tắc của họ yêu cầu mọi cỗ máy phải có khóa dừng cơ học mà người ngoài hệ thống vẫn dùng được.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "toren-vale"}
+    },
+    {
+      "id": "aster-infernus",
+      "category": "nhân-vật",
+      "title": "Aster Infernus",
+      "summary": "Tổng Hộ Vệ bị lịch sử xóa tên, về sau trở thành Chúa Tể Hỏa Ngục.",
+      "body": "Ông chống lệnh sau khi Hội Đồng hi sinh một thành phố. Mong muốn cứu tất cả dần biến thành ý định tước quyền lựa chọn của tất cả.",
+      "unlock": {"kind": "qua-màn", "targetId": "grave-bloom"}
+    },
+    {
+      "id": "vuon-mo-no-hoa",
+      "category": "địa-danh",
+      "title": "Vườn Mộ Nở Hoa",
+      "summary": "Mỗi bông hoa lưu một lời khai không được ghi vào sử sách.",
+      "body": "Hoa chỉ nở khi có người sẵn lòng lắng nghe. Vì vậy đội quân ăn ký ức tìm cách phá khu vườn trước mọi cuộc thanh trừng.",
+      "unlock": {"kind": "qua-màn", "targetId": "grave-bloom"}
+    },
+    {
+      "id": "thanh-tri-sat",
+      "category": "địa-danh",
+      "title": "Thành Trì Sắt",
+      "summary": "Xưởng cứu hộ bị biến thành dây chuyền sản xuất chiến cụ.",
+      "body": "Các khóa dừng của Toren đã bị vô hiệu bằng lệnh cấp Hội Đồng. Một số công nhân vẫn bí mật giấu lối ngắt cơ học trong nền xưởng.",
+      "unlock": {"kind": "qua-màn", "targetId": "iron-citadel"}
+    },
+    {
+      "id": "cu-thu-sat-thep",
+      "category": "kẻ-thù",
+      "title": "Cự Thú Sắt Thép",
+      "summary": "Cỗ máy cứu hộ khổng lồ bị khóa trong mệnh lệnh vây thành.",
+      "body": "Khung máy vẫn ưu tiên che chắn sinh mạng khi hai mệnh lệnh ngang quyền xung đột. Điểm yếu ấy cũng là bằng chứng mục đích ban đầu của nó.",
+      "unlock": {"kind": "qua-màn", "targetId": "deep-strata"}
+    },
+    {
+      "id": "loi-than-hong",
+      "category": "địa-danh",
+      "title": "Lõi Than Hồng",
+      "summary": "Nguồn nhiệt giữ các trụ cộng hưởng hoạt động qua mùa băng.",
+      "body": "Nyra từng cải tiến lõi để truyền năng lượng sạch. Công thức đảo chiều của Infernus biến nó thành máy hút ký ức quy mô lớn.",
+      "unlock": {"kind": "qua-màn", "targetId": "ember-core"}
+    },
+    {
+      "id": "phuong-trinh-cong-huong",
+      "category": "di-vật",
+      "title": "Phương Trình Cộng Hưởng",
+      "summary": "Công thức cho phép nhiều ý chí chia sẻ tải của Kết Giới.",
+      "body": "Sai lầm của Nyra là giả định mọi người vận hành đều tự nguyện. Lựa chọn thứ ba bổ sung sự đồng thuận như điều kiện bắt buộc.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "nyra-sol"}
+    },
+    {
+      "id": "hoi-dong-luu-quang",
+      "category": "phe-phái",
+      "title": "Hội Đồng Lưu Quang",
+      "summary": "Chính quyền cũ đã bí mật ra lệnh biến Khe Nứt thành vũ khí.",
+      "body": "Bảy thành viên ký lệnh rồi xóa hồ sơ khi thí nghiệm thất bại. Sự thật này không xóa tội của Infernus nhưng giải thích nguồn gốc cuộc chiến.",
+      "unlock": {"kind": "qua-màn", "targetId": "deep-strata"}
+    },
+    {
+      "id": "lenh-vu-khi-hoa",
+      "category": "di-vật",
+      "title": "Lệnh Vũ Khí Hóa",
+      "summary": "Mệnh lệnh có bảy con dấu cho phép cưỡng ép Kết Giới.",
+      "body": "Tài liệu định nghĩa ký ức là tài nguyên chiến lược. Đây là bằng chứng khiến các Hộ Vệ từ bỏ quyền chỉ huy tuyệt đối sau cuộc chiến.",
+      "unlock": {"kind": "qua-màn", "targetId": "deep-strata"}
+    },
+    {
+      "id": "vom-pha-le",
+      "category": "địa-danh",
+      "title": "Vòm Pha Lê",
+      "summary": "Mạng tinh thể nhận được tín hiệu từ những khả năng chưa thành hiện thực.",
+      "body": "Nova dùng Vòm làm giọng nói đầu tiên. Tín hiệu tồn tại vì cô đã nhìn thấy khả năng mình được đội Hộ Vệ cứu sống.",
+      "unlock": {"kind": "qua-màn", "targetId": "crystal-arc"}
+    },
+    {
+      "id": "giong-noi-nova",
+      "category": "nhân-vật",
+      "title": "Giọng Nói Của Nova",
+      "summary": "Một ý chí trẻ đang thành hình giữa hàng triệu tiếng vọng.",
+      "body": "Nova không phải bản sao của bất kỳ người chết nào. Cô là con người mới sinh ra từ cách các ký ức học lắng nghe nhau.",
+      "unlock": {"kind": "qua-màn", "targetId": "crystal-arc"}
+    },
+    {
+      "id": "phong-thi-nghiem-xanh",
+      "category": "địa-danh",
+      "title": "Phòng Thí Nghiệm Xanh",
+      "summary": "Nơi tạo Độc Câm Vọng và cũng là nơi sản sinh thuốc giải đầu tiên.",
+      "body": "Zarek phá phòng điều chế nhưng giữ vườn dược liệu. Anh tin cùng một tri thức có thể gây tội hoặc sửa sai tùy cách sử dụng.",
+      "unlock": {"kind": "qua-màn", "targetId": "verdant-lab"}
+    },
+    {
+      "id": "phao-dai-co-gioi",
+      "category": "địa-danh",
+      "title": "Pháo Đài Cơ Giới",
+      "summary": "Kho hồ sơ vận hành bằng bánh răng để tránh bị sửa từ xa.",
+      "body": "Cơ chế chậm nhưng lưu được dữ liệu nguyên vẹn qua cuộc thanh trừng. Tại đây đội tìm thấy hồ sơ của Titan và Mảnh Ấn cuối.",
+      "unlock": {"kind": "qua-màn", "targetId": "clockwork-bastion"}
+    },
+    {
+      "id": "titan-rho-ho-so",
+      "category": "nhân-vật",
+      "title": "Hồ Sơ Titan Rho",
+      "summary": "Vệ binh cổ có mệnh lệnh gốc bảo vệ mọi sinh mạng có ý chí.",
+      "body": "Toren chỉ sửa thân thể Titan, không sửa ký ức. Việc Titan tự chọn bảo vệ Nova chứng minh anh không còn là một cỗ máy phục tùng.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "titan"}
+    },
+    {
+      "id": "thanh-tri-hac-am",
+      "category": "địa-danh",
+      "title": "Thành Trì Hắc Ám",
+      "summary": "Nhà tù biến tiếng vọng người chết thành binh lính.",
+      "body": "Elara làm lệch nhịp chuông để trì hoãn nghi thức nhiều năm. Mỗi sai nhịp nhỏ đã cứu một linh hồn khỏi bị xóa tên.",
+      "unlock": {"kind": "qua-màn", "targetId": "dark-citadel"}
+    },
+    {
+      "id": "nguoi-chan-vong-am",
+      "category": "phe-phái",
+      "title": "Người Chăn Vọng Âm",
+      "summary": "Những người giúp ký ức của người chết hoàn thành lời cuối.",
+      "body": "Họ không gọi hồn hay điều khiển linh thể. Nhiệm vụ của họ là lắng nghe, xác nhận tên và để mỗi tiếng vọng tự chọn ở lại hay rời đi.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "elara"}
+    },
+    {
+      "id": "nu-hoang-bang-gia",
+      "category": "kẻ-thù",
+      "title": "Nữ Hoàng Băng Giá",
+      "summary": "Người canh Mảnh Ấn cuối bị xiềng bởi một mệnh lệnh giả.",
+      "body": "Bà tự đóng băng Thiên Điện để trì hoãn Infernus. Đội Hộ Vệ thắng bằng cách phá xiềng thay vì kết liễu người đang chống cự bên trong.",
+      "unlock": {"kind": "qua-màn", "targetId": "sky-temple"}
+    },
+    {
+      "id": "nghi-thuc-trai-tim",
+      "category": "di-vật",
+      "title": "Nghi Thức Trái Tim",
+      "summary": "Cách cũ đóng Khe Nứt bằng cách biến một ý chí thành chiếc khóa vĩnh viễn.",
+      "body": "Các thế hệ trước gọi đó là hi sinh cần thiết. Đội của Kael từ chối lặp lại nghi thức khi biết Nova là một con người.",
+      "unlock": {"kind": "qua-màn", "targetId": "sky-temple"}
+    },
+    {
+      "id": "cong-hon-mang",
+      "category": "địa-danh",
+      "title": "Cổng Hỗn Mang",
+      "summary": "Lối đi chỉ mở khi bốn Mảnh Ấn cùng chấp nhận một ý chí.",
+      "body": "Cổng phản chiếu ký ức để thử sự thống nhất của người đi qua. Một đội cưỡng ép lẫn nhau sẽ bị tách thành các bản sao đối địch.",
+      "unlock": {"kind": "qua-màn", "targetId": "chaos-gate"}
+    },
+    {
+      "id": "giao-uoc-cua-infernus",
+      "category": "di-vật",
+      "title": "Giao Ước Của Infernus",
+      "summary": "Lời hứa khôi phục thành phố đã mất bằng cái giá là ý chí của Nova.",
+      "body": "Giao ước có thể thực hiện đúng lời theo nghĩa hẹp, nhưng cư dân trở lại sẽ chỉ là ký ức được điều khiển và không thể tự lựa chọn.",
+      "unlock": {"kind": "qua-màn", "targetId": "chaos-gate"}
+    },
+    {
+      "id": "cuoc-hanh-quan-hu-khong",
+      "category": "địa-danh",
+      "title": "Cuộc Hành Quân Hư Không",
+      "summary": "Đội quân bản sao hộ tống Titan tới nghi thức cuối.",
+      "body": "Infernus cần thân thể Titan làm khuôn giữ Trái Tim. Mệnh lệnh gốc thức dậy khi Titan nhận ra Nova là sinh mạng cần bảo vệ.",
+      "unlock": {"kind": "qua-màn", "targetId": "void-march"}
+    },
+    {
+      "id": "coi-cuoi",
+      "category": "địa-danh",
+      "title": "Cõi Cuối",
+      "summary": "Vùng thực tại tạo cảnh vật từ điều người bước vào hối tiếc nhất.",
+      "body": "Ảo cảnh không thể sáng tạo ký ức mới, vì vậy các Hộ Vệ nhận ra bản sao bằng cách hỏi về lời hứa vừa được tạo trong hành trình.",
+      "unlock": {"kind": "qua-màn", "targetId": "final-realm"}
+    },
+    {
+      "id": "ky-uc-gia",
+      "category": "kẻ-thù",
+      "title": "Ký Ức Giả",
+      "summary": "Bản sao hoàn hảo của quá khứ nhưng không thể thay đổi cùng hiện tại.",
+      "body": "Chúng biết mọi vết thương cũ và dùng đúng giọng người thân. Điểm yếu là không có bóng và không trả lời được sự kiện mới.",
+      "unlock": {"kind": "qua-màn", "targetId": "final-realm"}
+    },
+    {
+      "id": "trai-tim-khe-nut",
+      "category": "thế-giới",
+      "title": "Trái Tim Khe Nứt",
+      "summary": "Tâm cộng hưởng nơi ký ức tích tụ đã sinh ra Nova.",
+      "body": "Trái Tim không thiện hay ác. Nó khuếch đại ý chí mạnh nhất, vì vậy sự đồng thuận của cả đội có thể đổi mục đích của nó.",
+      "unlock": {"kind": "qua-màn", "targetId": "rift-heart"}
+    },
+    {
+      "id": "ke-hoach-hoa-nhip",
+      "category": "thế-giới",
+      "title": "Kế Hoạch Hòa Nhịp",
+      "summary": "Tám ý chí chia tải Kết Giới mà không biến ai thành vật hi sinh.",
+      "body": "Mỗi thành viên giữ một nhịp riêng và tự nguyện kết nối. Khe Nứt trở thành cây cầu lưu giữ ký ức thay vì nhà tù.",
+      "unlock": {"kind": "qua-màn", "targetId": "rift-heart"}
+    },
+    {
+      "id": "cuoc-vay-ham-vinh-hang",
+      "category": "địa-danh",
+      "title": "Cuộc Vây Hãm Vĩnh Hằng",
+      "summary": "Chiến trường cuối nơi Infernus lặp lại khoảnh khắc thành phố đầu tiên sụp đổ.",
+      "body": "Ông giữ khoảnh khắc này vì tin đau khổ sẽ buộc mọi người đồng ý. Nhịp thứ tám phá vòng lặp bằng một lựa chọn tự nguyện.",
+      "unlock": {"kind": "qua-màn", "targetId": "eternal-siege"}
+    },
+    {
+      "id": "kael-orin-thu-kho",
+      "category": "nhân-vật",
+      "title": "Kael Orin",
+      "summary": "Hộ Vệ tuyến đầu đặt quyền lựa chọn của người được cứu lên trên mệnh lệnh.",
+      "body": "Kael không kế thừa danh hiệu từ gia đình. Anh được bầu sau khi tự ý mở cổng thành để dân tị nạn vào trú ẩn.",
+      "unlock": {"kind": "khởi-đầu"}
+    },
+    {
+      "id": "mira-voss-thu-kho",
+      "category": "nhân-vật",
+      "title": "Mira Voss",
+      "summary": "Họa Đồ Sư dùng mũi tên đánh dấu thực tại giữa những vùng ký ức biến đổi.",
+      "body": "Mira sống sót trong Hang Động Vọng Âm nhờ vẽ bản đồ lên thân cung. Cô không còn để ai giữ bản sao duy nhất của đường về.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "mira-voss"}
+    },
+    {
+      "id": "toren-vale-thu-kho",
+      "category": "nhân-vật",
+      "title": "Toren Vale",
+      "summary": "Thợ rèn cứu hộ đang thu hồi mọi vũ khí sinh ra từ thiết kế của mình.",
+      "body": "Toren mang theo sổ ghi cả người đã cứu lẫn thiệt hại do máy gây ra. Ông xem hai danh sách đều là trách nhiệm của mình.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "toren-vale"}
+    },
+    {
+      "id": "nyra-sol-thu-kho",
+      "category": "nhân-vật",
+      "title": "Nyra Sol",
+      "summary": "Nhà nguyên tố học tìm cách sửa phương trình cộng hưởng từng bị lợi dụng.",
+      "body": "Nyra viết mọi phát hiện theo hai cột: điều có thể làm và điều không được phép làm. Cột thứ hai luôn cần chữ ký của đồng đội.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "nyra-sol"}
+    },
+    {
+      "id": "zarek-venn-thu-kho",
+      "category": "nhân-vật",
+      "title": "Zarek Venn",
+      "summary": "Nhà độc học dùng chính kiến thức cũ để phục hồi ký ức cho nạn nhân.",
+      "body": "Zarek không xóa dấu hiệu phòng thí nghiệm trên áo. Anh giữ nó như lời nhắc rằng việc sửa sai không làm quá khứ biến mất.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "zarek"}
+    },
+    {
+      "id": "elara-quill-thu-kho",
+      "category": "nhân-vật",
+      "title": "Elara Quill",
+      "summary": "Người Chăn Vọng Âm giúp ký ức tự chọn ở lại hay rời đi.",
+      "body": "Elara ghi tên người chết vào lông vũ trên áo. Khi một linh hồn được giải thoát, tên ấy chuyển thành ánh sáng rồi biến mất.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "elara"}
+    },
+    {
+      "id": "titan-rho-thu-kho",
+      "category": "nhân-vật",
+      "title": "Titan Rho",
+      "summary": "Vệ binh thiết giáp đã tự viết mệnh lệnh đầu tiên cho chính mình.",
+      "body": "Titan giữ mã hiệu Rho như một phần quá khứ nhưng yêu cầu đồng đội gọi mình là Titan. Anh đang học sự khác nhau giữa tuân lệnh và tin tưởng.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "titan"}
+    },
+    {
+      "id": "nova-lys-thu-kho",
+      "category": "nhân-vật",
+      "title": "Nova Lys",
+      "summary": "Con người mới sinh ra khi hàng triệu ký ức học cách lắng nghe nhau.",
+      "body": "Nova chọn họ Lys theo tên ngôi sao đầu tiên nhìn thấy sau khi được giải phóng. Cô không còn là Trái Tim hay chiếc khóa của bất kỳ ai.",
+      "unlock": {"kind": "mở-nhân-vật", "targetId": "nova"}
+    }
+  ],
+  "ending": {
+    "title": "Bình Minh Có Tám Nhịp",
+    "text": "Khi nhịp thứ tám vang lên, Khe Nứt không khép lại. Nó trải thành một dải sáng nối những thành phố còn sống với ký ức của nơi đã mất. Infernus buông lửa khi nhận ra những người ông muốn cứu vẫn có thể được nhớ mà không phải phục tùng. Nova bước khỏi Trái Tim bằng đôi chân của chính mình, còn các Hộ Vệ trở về trong một bình minh không ai phải đánh đổi tên tuổi.",
+    "finalLine": "Kết Giới mới không được giữ bởi một người mạnh nhất, mà bởi nhiều người tự nguyện lắng nghe nhau.",
+    "characterEpilogues": {
+      "kael-orin": "Kael mở lại trường Hộ Vệ, nơi bài học đầu tiên là quyền từ chối một mệnh lệnh sai.",
+      "mira-voss": "Mira vẽ cây cầu ánh sáng lên bản đồ và luôn để một khoảng trống cho con đường chưa ai chọn.",
+      "toren-vale": "Toren biến Thành Trì Sắt thành xưởng cứu hộ, giao mọi máy móc hai khóa dừng độc lập.",
+      "nyra-sol": "Nyra công bố cả công thức lẫn sai lầm, rồi lập hội đồng dân sự giám sát mọi nghiên cứu cộng hưởng.",
+      "zarek": "Zarek phát thuốc phục hồi miễn phí và tự mình đọc lại tên cho từng người lấy được ký ức.",
+      "elara": "Elara dẫn những tiếng vọng cuối qua cây cầu, để họ tự chọn trở thành ký ức hay ánh sao.",
+      "titan": "Titan từ chối vị trí chỉ huy, chọn làm người gác cổng và học cách trồng hoa cùng trẻ nhỏ.",
+      "nova": "Nova chọn chuyến đi đầu tiên tới biển, nơi không ký ức nào từng mô tả đúng mùi của gió."
+    }
+  }
+}

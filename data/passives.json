@@ -1,0 +1,202 @@
+[
+  {
+    "id": "power-core",
+    "name": "Lõi Sức Mạnh",
+    "description": "Tăng toàn bộ sát thương.",
+    "icon": "assets/generated/weapons/ember-orb-v2.png",
+    "maxLevel": 999,
+    "stat": "damage",
+    "mode": "multiply",
+    "perLevel": 0.1
+  },
+  {
+    "id": "chrono-sigil",
+    "name": "Ấn Ký Thời Luân",
+    "description": "Giảm thời gian hồi của vũ khí.",
+    "icon": "assets/generated/weapons/storm-call-v2.png",
+    "maxLevel": 999,
+    "stat": "cooldownReduction",
+    "mode": "add",
+    "perLevel": 0.055
+  },
+  {
+    "id": "keen-lens",
+    "name": "Thấu Kính Sắc Bén",
+    "description": "Tăng tỉ lệ chí mạng và sát thương chí mạng trong trận.",
+    "icon": "assets/generated/weapons/rift-blade-v2.png",
+    "maxLevel": 999,
+    "stat": "critChance",
+    "secondaryStat": "critDamage",
+    "mode": "add",
+    "perLevel": 0.045,
+    "secondaryPerLevel": 0.1
+  },
+  {
+    "id": "iron-bark",
+    "name": "Vỏ Cây Sắt",
+    "description": "Tăng Giáp.",
+    "icon": "assets/generated/weapons/aegis-orbit-v2.png",
+    "maxLevel": 999,
+    "stat": "armor",
+    "mode": "add",
+    "perLevel": 2
+  },
+  {
+    "id": "stride-boots",
+    "name": "Giày Sải Bước",
+    "description": "Tăng tốc độ di chuyển.",
+    "icon": "assets/generated/weapons/phase-darts-v2.png",
+    "maxLevel": 999,
+    "stat": "moveSpeed",
+    "mode": "multiply",
+    "perLevel": 0.065
+  },
+  {
+    "id": "vital-seed",
+    "name": "Mầm Sinh Lực",
+    "description": "Tăng hồi phục và Sinh lực tối đa.",
+    "icon": "assets/generated/weapons/venom-bloom-v2.png",
+    "maxLevel": 999,
+    "stat": "hpRegen",
+    "secondaryStat": "maxHp",
+    "mode": "add",
+    "perLevel": 0.65,
+    "secondaryPerLevel": 8
+  },
+  {
+    "id": "blood-chalice",
+    "name": "Chén Máu",
+    "description": "Nhận Hút Máu từ sát thương gây ra.",
+    "icon": "assets/generated/weapons/gravity-bomb-v2.png",
+    "maxLevel": 999,
+    "stat": "lifeSteal",
+    "mode": "add",
+    "perLevel": 0.012
+  },
+  {
+    "id": "longscope",
+    "name": "Ống Ngắm Tầm Xa",
+    "description": "Tăng tầm đánh và kích thước hiệu ứng.",
+    "icon": "assets/generated/weapons/void-laser-v2.png",
+    "maxLevel": 999,
+    "stat": "range",
+    "mode": "multiply",
+    "perLevel": 0.075
+  },
+  {
+    "id": "wind-feathers",
+    "name": "Lông Vũ Gió",
+    "description": "Tăng tốc độ đạn và tốc độ đánh.",
+    "icon": "assets/generated/weapons/echo-bow-v2.png",
+    "maxLevel": 999,
+    "stat": "projectileSpeed",
+    "secondaryStat": "attackSpeed",
+    "mode": "multiply",
+    "perLevel": 0.08,
+    "secondaryPerLevel": 0.035
+  },
+  {
+    "id": "fortune-coin",
+    "name": "Đồng Xu May Mắn",
+    "description": "Tăng May Mắn và lượng vàng nhận được.",
+    "icon": "assets/generated/weapons/arcane-nova-v2.png",
+    "maxLevel": 999,
+    "stat": "luck",
+    "secondaryStat": "goldGain",
+    "mode": "add",
+    "perLevel": 0.07,
+    "secondaryPerLevel": 0.08
+  },
+  {
+    "id": "scholars-mark",
+    "name": "Dấu Ấn Học Giả",
+    "description": "Tăng lượng Kinh nghiệm nhận được.",
+    "icon": "assets/generated/weapons/frost-shards-v2.png",
+    "maxLevel": 999,
+    "stat": "expGain",
+    "mode": "multiply",
+    "perLevel": 0.09
+  },
+  {
+    "id": "bulwark-heart",
+    "name": "Trái Tim Thành Lũy",
+    "description": "Tăng mạnh Sinh lực tối đa.",
+    "icon": "assets/generated/weapons/aegis-orbit-v2.png",
+    "maxLevel": 999,
+    "stat": "maxHp",
+    "mode": "add",
+    "perLevel": 14
+  },
+  {
+    "id": "echo-prism",
+    "name": "Lăng Kính Vọng Âm",
+    "description": "Tăng tốc độ đánh.",
+    "icon": "assets/generated/weapons/echo-summon-v2.png",
+    "maxLevel": 999,
+    "stat": "attackSpeed",
+    "mode": "multiply",
+    "perLevel": 0.075
+  },
+  {
+    "id": "phase-cloak",
+    "name": "Áo Choàng Xuyên Pha",
+    "description": "Tăng tỉ lệ né tránh.",
+    "icon": "assets/generated/weapons/phase-darts-v2.png",
+    "maxLevel": 999,
+    "stat": "dodge",
+    "mode": "add",
+    "perLevel": 0.035
+  },
+  {
+    "id": "endless-magazine",
+    "name": "Băng Đạn Vô Tận",
+    "description": "Tăng thêm 1 tia đạn cho mọi vũ khí dùng đạn.",
+    "icon": "assets/generated/weapons/pulse-rifle-v2.png",
+    "maxLevel": 999,
+    "stat": "bonusProjectiles",
+    "mode": "add",
+    "perLevel": 1
+  },
+  {
+    "id": "life-spring",
+    "name": "Suối Sinh Mệnh",
+    "description": "Tăng 8% hiệu quả hồi máu.",
+    "icon": "assets/generated/weapons/venom-bloom-v2.png",
+    "maxLevel": 999,
+    "stat": "healingPower",
+    "mode": "multiply",
+    "perLevel": 0.08
+  },
+  {
+    "id": "void-drill",
+    "name": "Mũi Khoan Hư Không",
+    "description": "Tăng khả năng xuyên giáp của mọi đòn đánh.",
+    "icon": "assets/generated/weapons/void-laser-v2.png",
+    "maxLevel": 999,
+    "stat": "armorPenetration",
+    "mode": "add",
+    "perLevel": 0.055
+  },
+  {
+    "id": "steadfast-core",
+    "name": "Lõi Kiên Định",
+    "description": "Giảm lực hất lùi và độ giật từ đòn đánh địch.",
+    "icon": "assets/generated/weapons/aegis-orbit-v2.png",
+    "maxLevel": 999,
+    "stat": "statusResistance",
+    "mode": "add",
+    "perLevel": 0.06
+  },
+  {
+    "id": "giant-bloodline",
+    "name": "Huyết Mạch Khổng Lồ",
+    "description": "Mỗi cấp tăng 2,5% kích thước và Sinh lực, tăng 1,2% tầm đánh, đồng thời chặn 0,5 sát thương trước khi tính Giáp.",
+    "icon": "assets/generated/weapons/gravity-bomb-v2.png",
+    "maxLevel": 999,
+    "stat": "bodyScale",
+    "secondaryStat": "flatBlock",
+    "mode": "add",
+    "perLevel": 0.025,
+    "secondaryPerLevel": 0.5
+  }
+]
