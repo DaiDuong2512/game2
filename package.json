@@ -1,0 +1,21 @@
+{
+  "name": "riftwarden-echo-siege",
+  "version": "4.0.2",
+  "private": true,
+  "type": "module",
+  "description": "Trò chơi sinh tồn hành động TypeScript/Canvas vận hành bằng dữ liệu.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && node scripts/dev-server.mjs",
+    "start": "node scripts/dev-server.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "check": "npm run typecheck && npm run test"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
