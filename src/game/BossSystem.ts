@@ -49,17 +49,19 @@ export interface BossAbilityVisual {
   radius: number;
   time: number;
   maxTime: number;
+  kind: 'circle' | 'ring';
 }
 
 export class BossSystem {
   public readonly telegraphs = new ObjectPool(() => new Telegraph(), 16, 60);
-  private static readonly CAST_CUE_WINDOW = 0.65;
+  private static readonly CAST_CUE_WINDOW = 0.85;
   private boss: Enemy | null = null;
   private castTimer = 0;
   private spiralOffset = 0;
   private castCuePlayed = false;
   private leashRepositionCooldown = 0;
   private abilityTeleportCooldown = 0;
+  private castRecovery = 0;
   private readonly abilityVisuals: BossAbilityVisual[] = [];
 
   public setBoss(enemy: Enemy): void {
@@ -70,6 +72,7 @@ export class BossSystem {
     this.leashRepositionCooldown = 1.5;
     this.abilityTeleportCooldown = 4;
     this.abilityVisuals.length = 0;
+    this.castRecovery = 0;
   }
 
   public clearBoss(): void {
@@ -87,6 +90,13 @@ export class BossSystem {
 
   public getAbilityVisuals(): readonly BossAbilityVisual[] {
     return this.abilityVisuals;
+  }
+
+  public animationFrame(time: number, moving: boolean): number {
+    if (this.getCastCue()) return 3;
+    if (this.castRecovery > 0.26) return 4;
+    if (this.castRecovery > 0) return 5;
+    return moving ? [0, 1, 0, 2][Math.floor(time * 6) % 4]! : Math.floor(time * 2) % 3;
   }
 
   /** Cửa sổ wind-up chung để Renderer báo trước mọi đòn của trùm bằng hình học. */
@@ -112,9 +122,13 @@ export class BossSystem {
 
   public update(dt: number, world: BossWorld): void {
     this.updateAbilityVisuals(dt);
-    this.updateTelegraphs(dt, world);
     const boss = this.getBoss();
-    if (!boss) return;
+    if (!boss) {
+      this.telegraphs.releaseAll();
+      return;
+    }
+    this.castRecovery = Math.max(0, this.castRecovery - dt);
+    this.updateTelegraphs(dt, world);
     this.leashRepositionCooldown = Math.max(0, this.leashRepositionCooldown - dt);
     this.abilityTeleportCooldown = Math.max(0, this.abilityTeleportCooldown - dt);
     this.repositionIfLeashed(boss, world);
@@ -127,7 +141,7 @@ export class BossSystem {
       world.particles.ring(boss.x, boss.y, '#e7bb63', 220, 0.7);
       world.particles.impact?.('physical', boss.x, boss.y, 190, 0.55, 0.9);
       world.screenShake(6);
-      this.castTimer = 0.5;
+      this.castTimer = BossSystem.CAST_CUE_WINDOW;
       this.castCuePlayed = false;
     }
 
@@ -143,7 +157,8 @@ export class BossSystem {
       world.particles.ring(boss.x, boss.y, '#ffcf70', boss.radius + 56, BossSystem.CAST_CUE_WINDOW);
     }
     if (this.castTimer > 0) return;
-    this.castTimer = Math.max(0.75, 2.7 - phase * 0.42);
+    this.castTimer = Math.max(1.55, 2.9 - phase * 0.38);
+    this.castRecovery = 0.52;
     this.castCuePlayed = false;
 
     switch (boss.config.id) {
@@ -230,7 +245,7 @@ export class BossSystem {
       const distance = world.rng.float(30, 310);
       const x = world.player.x + Math.cos(angle) * distance + world.player.vx * 0.45;
       const y = world.player.y + Math.sin(angle) * distance + world.player.vy * 0.45;
-      this.createTelegraph(x, y, 88 + phase * 10, world.rng.float(0.65, 1.0), boss.status.blindTime > 0 ? 0 : boss.damage * 1.4, 'circle');
+      this.createTelegraph(x, y, 88 + phase * 10, world.rng.float(0.9, 1.25) + index * 0.055, boss.status.blindTime > 0 ? 0 : boss.damage * 1.25, 'circle');
     }
     this.radialVolley(boss, world, 12 + phase * 4, 275, boss.damage * 0.48, '#ff7444', -this.spiralOffset);
     if (phase === 3) {
@@ -277,19 +292,20 @@ export class BossSystem {
         : Math.abs(Math.sqrt(distanceSq) - telegraph.radius * 0.72) <= 42 + world.player.radius;
       const owner = this.getBoss();
       const ownerControlled = Boolean(owner && (owner.status.blindTime > 0 || owner.status.stunTime > 0 || owner.status.paralysisTime > 0));
-      if (hit && telegraph.damage > 0 && !ownerControlled) world.damagePlayer(telegraph.damage, telegraph.x, telegraph.y);
-      world.particles.ring(telegraph.x, telegraph.y, '#ff7a4d', telegraph.radius, 0.42);
-      world.particles.burst(telegraph.x, telegraph.y, '#ff7a4d', 20, 240, 4);
-      world.particles.impact?.('fire', telegraph.x, telegraph.y, Math.min(250, telegraph.radius * 1.55), 0.48, 0.94);
-      this.pushAbilityVisual(telegraph.bossId, telegraph.x, telegraph.y, telegraph.radius, 0.72);
+      if (hit && owner && telegraph.damage > 0 && !ownerControlled) world.damagePlayer(telegraph.damage, telegraph.x, telegraph.y);
+      const element = owner?.config.element ?? 'physical';
+      const color = element === 'ice' ? '#8cddfa' : element === 'arcane' ? '#c58afa' : element === 'fire' ? '#ff9256' : '#e4ba78';
+      world.particles.ring(telegraph.x, telegraph.y, color, telegraph.radius, 0.42);
+      world.particles.burst(telegraph.x, telegraph.y, color, 14, 200, 4);
+      this.pushAbilityVisual(telegraph.bossId, telegraph.x, telegraph.y, telegraph.radius, 0.72, telegraph.kind);
       world.screenShake(4.5);
       this.telegraphs.release(telegraph);
     });
   }
 
-  private pushAbilityVisual(bossId: string, x: number, y: number, radius: number, duration: number): void {
+  private pushAbilityVisual(bossId: string, x: number, y: number, radius: number, duration: number, kind: 'circle' | 'ring' = 'circle'): void {
     if (!bossId) return;
-    this.abilityVisuals.push({ bossId, x, y, radius, time: duration, maxTime: duration });
+    this.abilityVisuals.push({ bossId, x, y, radius, time: duration, maxTime: duration, kind });
     if (this.abilityVisuals.length > 18) this.abilityVisuals.splice(0, this.abilityVisuals.length - 18);
   }
 

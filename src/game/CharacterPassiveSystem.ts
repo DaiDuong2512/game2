@@ -19,6 +19,12 @@ export const NYRA_INFERNO_DURATION = 10;
 export const TOREN_FORGE_KILLS = 50;
 export const MIRA_DAMAGE_PER_KILL = 0.005;
 
+/** Full early reward; diminishing returns after 100 kills, approaching +100%. */
+export function miraKillDamageBonus(kills: number): number {
+  const count = Math.max(0, kills);
+  return count <= 100 ? count * MIRA_DAMAGE_PER_KILL : 0.5 + 0.5 * (1 - Math.exp(-(count - 100) / 300));
+}
+
 export interface CharacterPassiveWorld extends ProjectileWorld {
   data: GameData;
   projectiles: ProjectileSystem;
@@ -78,9 +84,11 @@ export class CharacterPassiveSystem {
 
   public onEnemyKilled(world: CharacterPassiveWorld): void {
     if (world.player.character.id === 'mira-voss') {
+      const previous = miraKillDamageBonus(this.miraKillStacks);
       this.miraKillStacks += 1;
-      world.player.stats.apply('damage', MIRA_DAMAGE_PER_KILL, 'add');
-      if (this.miraKillStacks % 10 === 0) world.toast(`Xuyên Táo · +${this.miraKillStacks * 0.5}% sát thương`);
+      const bonus = miraKillDamageBonus(this.miraKillStacks);
+      world.player.stats.apply('damage', bonus - previous, 'add');
+      if (this.miraKillStacks % 25 === 0) world.toast(`Xuyên Táo · +${(bonus * 100).toFixed(1)}% sát thương`);
     }
     if (world.player.character.id === 'toren-vale') {
       this.torenForgeKills += 1;
@@ -95,7 +103,7 @@ export class CharacterPassiveSystem {
         const ratio = kaelBloodiedRageRatio(player.health, player.stats.get('maxHp'));
         return `Cuồng nộ: +${Math.round(ratio * 50)}% hút máu · +${Math.round(ratio * 200)}% tốc đánh`;
       }
-      case 'mira-voss': return `Xuyên Táo: ${this.miraKillStacks} mạng · +${(this.miraKillStacks * 0.5).toLocaleString('vi-VN')}% sát thương`;
+      case 'mira-voss': return `Xuyên Táo: ${this.miraKillStacks} mạng · +${(miraKillDamageBonus(this.miraKillStacks) * 100).toLocaleString('vi-VN', { maximumFractionDigits: 1 })}% sát thương`;
       case 'toren-vale': return `Luyện Lò: ${this.torenForgeKills % TOREN_FORGE_KILLS}/${TOREN_FORGE_KILLS} giáp thu thập`;
       case 'nyra-sol': return `Cháy Càng Cháy: ${this.nyraBurnPoints}/${NYRA_INFERNO_COST} điểm`;
       case 'zarek': return 'Bộ Pháp Khói Độc: vệt độc gây 80% sát thương Bom Khói Độc';

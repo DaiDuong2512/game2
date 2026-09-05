@@ -169,7 +169,9 @@ function activeHarness(config, runtimeOverrides = {}) {
       return { amount: damage, critical: false, killed: false };
     },
   };
-  new SkillSystem().update(0.1, world);
+  const skills = new SkillSystem();
+  skills.update(0.1, world);
+  if (config.id === 'titan') skills.update(0.32, world);
   return { player, enemy, projectiles, hits };
 }
 

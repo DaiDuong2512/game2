@@ -246,6 +246,10 @@ Lỗi còn lại và mức độ:
 Người xác nhận:
 ```
 
+## Kết quả bản dựng 4.1.0 — 2026-09-05
+
+Typecheck và 252/252 test đạt. Chrome tự động kiểm tra 8 nhân vật với Q/E/R, 20 map, 4 boss × 3 pha, mobile giả lập 390 × 844 và Canvas 2D dự phòng; không lỗi tải hoặc JavaScript. Đã chạy vòng lặp game thật, nhấn di chuyển/Q/R Titan và xác minh boss trồi lên rồi di chuyển. Số đo stress là thời gian gửi lệnh vẽ, chưa phải FPS trên điện thoại thật. Xem [báo cáo phát hành 4.1](RELEASE_4_1.md), [ma trận trình duyệt](qa-latest/browser-release-v8.json) và [trận chạy thật](qa-latest/gameplay-live-v8.json).
+
 ## 8. Kết quả nghiệm thu bản dựng 4.0.2
 
 ```text

@@ -1,4 +1,7 @@
 {
-  "version": "4.0.2",
-  "builtAt": "2026-09-04T14:38:22.634Z"
+  "version": "4.1.0",
+  "builtAt": "2026-09-05T15:11:02.058Z",
+  "compact": true,
+  "assetCount": 88,
+  "assets": "WebP with alpha; lossless encoding for animation/effects, oversized legacy props and UI resized for runtime"
 }

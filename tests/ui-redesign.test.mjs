@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 const [ui, css, html] = await Promise.all([
   readFile(new URL('../src/ui/UIManager.ts', import.meta.url), 'utf8'),
   readFile(new URL('../src/styles.css', import.meta.url), 'utf8'),
-  readFile(new URL('../index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../src/index.html', import.meta.url), 'utf8'),
 ]);
 
 test('HUD exposes readable progress, objective and exactly three combat abilities', () => {

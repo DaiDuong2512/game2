@@ -15,6 +15,8 @@ import type { Camera } from './Camera.js';
 import { combatCueProfile, combatCueTier, impactWeightForSize, type ImpactWeight } from './CombatVfxLanguage.js';
 import { GpuCanvasPresenter, type GpuRenderStats, type RenderBackend } from './GpuCanvasPresenter.js';
 import { drawProceduralPlayerSprite } from './ProceduralPlayerSprite.js';
+import { terrainBiome } from '../game/TerrainSystem.js';
+import { titanActionFrame, TITAN_FALL_IMPACT, TITAN_IMPACT_VFX_DURATION } from '../game/CombatTiming.js';
 
 export interface RenderScene {
   stage: StageConfig;
@@ -43,6 +45,10 @@ const VOID_DEVOURER_SPRITE_PATH = 'assets/generated/bosses-v3/void-devourer-v3.p
 const VOID_DEVOURER_ABILITY_PATH = 'assets/generated/bosses-v3/void-devourer-ability-v2.png';
 const TERRAIN_PROPS_ATLAS_PATH = 'assets/generated/terrain-v1/terrain-props-atlas-v1.png';
 const TERRAIN_GRASS_ATLAS_PATH = 'assets/generated/terrain-v1/terrain-grass-atlas-v1.png';
+const BOSS_MOTION_PATH = 'assets/generated/combat-v8/boss-motion.png';
+const BOSS_IMPACT_PATH = 'assets/generated/combat-v8/boss-impact.png';
+const TITAN_ACTION_PATH = 'assets/generated/combat-v8/titan-actions.png';
+const GROUND_TEXTURE_PATH = 'assets/generated/combat-v8/ground-tiles.png';
 const TERRAIN_ATLAS_COLUMNS = 4;
 const TERRAIN_ATLAS_ROWS = 3;
 const GRASS_ATLAS_COLUMNS = 4;
@@ -130,6 +136,12 @@ export class Renderer {
   private width = 1280;
   private height = 720;
   private pixelRatio = 1;
+  private sceneTime = 0;
+  private reducedMotion = false;
+  private groundOriginX = 0;
+  private groundOriginY = 0;
+  private readonly groundPatterns = new Map<number, CanvasPattern>();
+  private readonly depthQueue: (Enemy | TerrainFeature | Player)[] = [];
 
   public constructor(canvas: HTMLCanvasElement, assets: AssetManager, camera: Camera) {
     this.canvas = canvas;
@@ -142,12 +154,17 @@ export class Renderer {
     void this.assets.load(TOXIC_SMOKE_VFX_PATH);
     void this.assets.load(PROJECTILE_ATLAS_PATH);
     void this.assets.load(GUARDIAN_PASSIVE_ATLAS_PATH);
-    void this.assets.load(BOSS_CHARACTER_ATLAS_PATH);
-    void this.assets.load(BOSS_ABILITY_ATLAS_PATH);
-    void this.assets.load(VOID_DEVOURER_SPRITE_PATH);
-    void this.assets.load(VOID_DEVOURER_ABILITY_PATH);
+    if (!this.assets.get(BOSS_MOTION_PATH)) {
+      void this.assets.load(BOSS_CHARACTER_ATLAS_PATH);
+      void this.assets.load(VOID_DEVOURER_SPRITE_PATH);
+    }
+    if (!this.assets.get(BOSS_IMPACT_PATH)) {
+      void this.assets.load(BOSS_ABILITY_ATLAS_PATH);
+      void this.assets.load(VOID_DEVOURER_ABILITY_PATH);
+    }
     void this.assets.load(TERRAIN_PROPS_ATLAS_PATH);
     void this.assets.load(TERRAIN_GRASS_ATLAS_PATH);
+    for (const path of [BOSS_MOTION_PATH, BOSS_IMPACT_PATH, TITAN_ACTION_PATH, GROUND_TEXTURE_PATH]) void this.assets.load(path);
     this.canvas.style.imageRendering = 'pixelated';
     this.context.imageSmoothingEnabled = false;
     this.resize();
@@ -187,6 +204,10 @@ export class Renderer {
   }
 
   public render(scene: RenderScene): void {
+    this.sceneTime = scene.time;
+    this.groundOriginX = scene.terrain.originX;
+    this.groundOriginY = scene.terrain.originY;
+    this.reducedMotion = scene.settings.reducedParticles;
     const leftWorld = this.camera.x - this.width * 0.5 - this.camera.shakeX;
     const topWorld = this.camera.y - this.height * 0.5 - this.camera.shakeY;
     const gpuBackground = this.presenter.beginGpuFrame(
@@ -198,23 +219,30 @@ export class Renderer {
     if (!gpuBackground) this.drawBackground(scene.stage);
     this.drawTerrainGround(scene.stage);
     this.drawTerrain(scene.terrain);
+    this.drawEnvironmentMotion(scene);
     this.drawTelegraphs(scene);
     this.drawBossAbilityVisuals(scene);
+    this.drawTitanGroundVfx(scene.player);
     this.drawUltimateField(scene);
     this.drawPersistentZones(scene);
     this.drawSpawnPortals(scene);
     this.drawLoot(scene);
+    this.drawWeaponCompanions(scene);
     this.drawEnemies(scene);
     this.drawProjectiles(scene);
     this.drawAbilityCastCue(scene);
-    this.drawWeaponCompanions(scene);
-    this.drawPlayer(scene.player, scene.time, scene.settings.reducedParticles);
     this.drawParticles(scene);
     this.drawAtlasVfx(scene);
     if (scene.settings.damageNumbers) this.drawFloatingText(scene);
     this.drawBossDirectionIndicator(scene);
     this.drawScreenEdge(scene.player);
     this.presenter.present();
+  }
+
+  private addGroundRing(...args: Parameters<GpuCanvasPresenter['addGroundRing']>): boolean {
+    // Textured ground is on the Canvas layer. Critical warnings must be above it.
+    if (this.assets.get(GROUND_TEXTURE_PATH)) return false;
+    return this.presenter.addGroundRing(...args);
   }
 
   private drawBackground(stage: StageConfig): void {
@@ -227,32 +255,34 @@ export class Renderer {
   }
 
   private drawTerrainGround(stage: StageConfig): void {
-    const image = this.assets.get(stage.thumbnail);
+    const image = this.assets.get(GROUND_TEXTURE_PATH);
     if (!image) return;
     const ctx = this.context;
-    const sourceWidth = Math.max(1, image.naturalWidth || image.width);
-    const sourceHeight = Math.max(1, image.naturalHeight || image.height);
-    const scale = Math.max(this.width / sourceWidth, this.height / sourceHeight) * 1.16;
-    const drawWidth = sourceWidth * scale;
-    const drawHeight = sourceHeight * scale;
-    const overflowX = Math.max(0, drawWidth - this.width);
-    const overflowY = Math.max(0, drawHeight - this.height);
-    const parallaxX = Math.sin(this.camera.x / 2100 + stage.index) * overflowX * 0.28;
-    const parallaxY = Math.sin(this.camera.y / 1900 + stage.index * 0.63) * overflowY * 0.28;
+    const biome = terrainBiome(stage);
+    let pattern = this.groundPatterns.get(biome);
+    if (!pattern) {
+      // Cache each material once; textures stay fixed to world coordinates.
+      const tile = document.createElement('canvas');
+      tile.width = tile.height = 640;
+      const tileContext = tile.getContext('2d');
+      if (!tileContext) return;
+      const sw = image.naturalWidth / 2;
+      const sh = image.naturalHeight / 2;
+      tileContext.drawImage(image, biome % 2 * sw, Math.floor(biome / 2) * sh, sw, sh, 0, 0, 640, 640);
+      pattern = ctx.createPattern(tile, 'repeat') ?? undefined;
+      if (!pattern) return;
+      this.groundPatterns.set(biome, pattern);
+    }
+    const offsetX = ((-this.camera.x - this.groundOriginX + this.width / 2 + this.camera.shakeX) % 640 + 640) % 640;
+    const offsetY = ((-this.camera.y - this.groundOriginY + this.height / 2 + this.camera.shakeY) % 640 + 640) % 640;
     ctx.save();
-    ctx.imageSmoothingEnabled = true;
-    ctx.globalAlpha = 0.5;
-    ctx.drawImage(
-      image,
-      -overflowX * 0.5 + parallaxX,
-      -overflowY * 0.5 + parallaxY,
-      drawWidth,
-      drawHeight,
-    );
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = hexToRgba(stage.theme.background, 0.48);
-    ctx.fillRect(0, 0, this.width, this.height);
+    ctx.translate(offsetX, offsetY);
+    ctx.globalAlpha = 0.88;
+    ctx.fillStyle = pattern;
+    ctx.fillRect(-offsetX, -offsetY, this.width, this.height);
     ctx.restore();
+    ctx.fillStyle = hexToRgba(stage.theme.background, 0.2);
+    ctx.fillRect(0, 0, this.width, this.height);
   }
 
   private drawTerrain(terrain: TerrainSystem): void {
@@ -279,7 +309,7 @@ export class Renderer {
         const size = Math.round(58 * patch.scale);
         ctx.save();
         ctx.translate(Math.round(screen.x), Math.round(screen.y));
-        ctx.rotate(patch.rotation);
+        ctx.rotate(patch.rotation + (this.reducedMotion ? 0 : Math.sin(this.sceneTime * 1.5 + patch.x * 0.008) * 0.065));
         ctx.globalAlpha = 0.82;
         ctx.drawImage(
           grassAtlas,
@@ -296,9 +326,37 @@ export class Renderer {
       }
     }
 
-    if (propsAtlas) {
-      for (const feature of terrain.features()) {
-        if (feature.kind !== 'water') this.drawTerrainFeature(propsAtlas, feature);
+    ctx.restore();
+  }
+
+  private drawEnvironmentMotion(scene: RenderScene): void {
+    const ctx = this.context;
+    ctx.save();
+    for (const feature of scene.terrain.features()) {
+      if (feature.kind !== 'water' || !this.camera.isVisible(feature.x, feature.y, 120)) continue;
+      const p = this.camera.worldToScreen(feature.x, feature.y);
+      ctx.strokeStyle = '#bedfdf';
+      ctx.lineWidth = 1;
+      const phase = this.reducedMotion ? 0.4 : (scene.time * 0.35 + feature.id % 17 / 17) % 1;
+      ctx.globalAlpha = (1 - phase) * 0.24;
+      ctx.beginPath();
+      ctx.ellipse(p.x, p.y + 3, 12 + phase * 43, 5 + phase * 25, 0, 0, TAU);
+      ctx.stroke();
+    }
+    // World anchored drifting motes; no allocation or particle-pool pressure.
+    if (!this.reducedMotion) {
+      ctx.fillStyle = scene.stage.theme.accent;
+      const spacing = 230;
+      const left = Math.floor((this.camera.x - this.width / 2) / spacing);
+      const top = Math.floor((this.camera.y - this.height / 2) / spacing);
+      for (let cy = top; cy <= top + Math.ceil(this.height / spacing); cy += 1) {
+        for (let cx = left; cx <= left + Math.ceil(this.width / spacing); cx += 1) {
+          const seed = Math.sin(cx * 127.1 + cy * 311.7);
+          const p = this.camera.worldToScreen(cx * spacing + 115 + Math.sin(scene.time * 0.4 + seed * 10) * 32,
+            cy * spacing + 90 + Math.cos(scene.time * 0.3 + seed * 8) * 24);
+          ctx.globalAlpha = 0.12 + (1 + Math.sin(scene.time + seed * 30)) * 0.12;
+          ctx.fillRect(p.x, p.y, 2, 2);
+        }
       }
     }
     ctx.restore();
@@ -310,12 +368,23 @@ export class Renderer {
     const cellWidth = (atlas.naturalWidth || atlas.width) / TERRAIN_ATLAS_COLUMNS;
     const cellHeight = (atlas.naturalHeight || atlas.height) / TERRAIN_ATLAS_ROWS;
     const row = feature.kind === 'tree' ? 0 : feature.kind === 'rock' ? 1 : 2;
-    const column = feature.variant % TERRAIN_ATLAS_COLUMNS;
+    const column = feature.kind === 'rock' ? [1, 2, 0, 3][feature.variant % 4]! : feature.variant % TERRAIN_ATLAS_COLUMNS;
     const screen = this.camera.worldToScreen(feature.x, feature.y);
     const width = feature.kind === 'water' ? 176 : feature.kind === 'tree' ? 118 : 104;
     const height = feature.kind === 'water' ? 122 : feature.kind === 'tree' ? 148 : 116;
     this.context.save();
-    this.context.globalAlpha = feature.kind === 'water' ? 0.9 : 1;
+    this.context.globalAlpha *= feature.kind === 'water' ? 0.9 : 1;
+    if (feature.kind !== 'water') {
+      this.context.fillStyle = '#02080d66';
+      this.context.beginPath();
+      this.context.ellipse(screen.x + 10, screen.y + 20, width * 0.43, 15, -0.15, 0, TAU);
+      this.context.fill();
+    }
+    if (feature.kind === 'tree' && !this.reducedMotion) {
+      this.context.translate(screen.x, screen.y + height * 0.2);
+      this.context.rotate(Math.sin(this.sceneTime * 1.2 + feature.x * 0.004) * 0.016);
+      this.context.translate(-screen.x, -screen.y - height * 0.2);
+    }
     this.context.drawImage(
       atlas,
       column * cellWidth,
@@ -338,19 +407,36 @@ export class Renderer {
       if (!this.camera.isVisible(telegraph.x, telegraph.y, telegraph.radius + 20)) return;
       const progress = 1 - telegraph.time / Math.max(0.001, telegraph.maxTime);
       ctx.save();
-      this.drawBossAbilityFrame(telegraph.bossId, 0, screen.x, screen.y, telegraph.radius * 2.05, 0.2 + progress * 0.2);
+      if (telegraph.kind === 'circle') this.drawBossAbilityFrame(telegraph.bossId, 0, screen.x, screen.y, telegraph.radius * 2.05, 0.2 + progress * 0.2);
+      else {
+        for (let index = 0; index < 6; index += 1) {
+          const angle = index / 6 * TAU;
+          this.drawBossAbilityFrame(telegraph.bossId, 0, screen.x + Math.cos(angle) * telegraph.radius * 0.72,
+            screen.y + Math.sin(angle) * telegraph.radius * 0.72, 64, 0.3 + progress * 0.2);
+        }
+      }
+      if (telegraph.bossId === 'lord-infernus' && telegraph.time < 0.5) {
+        const atlas = this.assets.get(BOSS_IMPACT_PATH);
+        if (atlas) {
+          const fall = 1 - telegraph.time / 0.5;
+          ctx.save();
+          ctx.globalAlpha = 0.9;
+          this.drawMotionCell(atlas, 3, fall < 0.65 ? 0 : 1, 4, screen.x, screen.y - (1 - fall * fall) * 240, 92);
+          ctx.restore();
+        }
+      }
       const warningColor = scene.settings.colorBlindMode === 'off' ? '#ff6746' : '#ffe36c';
       const imminentColor = '#fff1c1';
       ctx.globalAlpha = (compact ? 0.08 : 0.12) + progress * (compact ? 0.14 : 0.18);
       ctx.fillStyle = warningColor;
       if (telegraph.kind === 'circle') this.drawHatchedCircle(screen.x, screen.y, telegraph.radius, compact ? 22 : 13, compact ? 1 : 2);
-      else this.drawHatchedAnnulus(screen.x, screen.y, telegraph.radius * 0.72, compact ? 52 : 44, compact ? 31 : 24);
+      else this.drawHatchedAnnulus(screen.x, screen.y, telegraph.radius * 0.72, 84, compact ? 31 : 24);
 
       ctx.globalAlpha = 0.58 + progress * 0.4;
       const ringColor = progress > 0.72 ? imminentColor : warningColor;
       const ringAlpha = 0.58 + progress * 0.4;
       ctx.fillStyle = ringColor;
-      if (!this.presenter.addGroundRing(
+      if (!this.addGroundRing(
         telegraph.x,
         telegraph.y,
         telegraph.radius,
@@ -362,7 +448,7 @@ export class Renderer {
         this.drawPixelRing(screen.x, screen.y, telegraph.radius, 3 + Math.round(progress * 3), compact ? 30 : 48);
       }
       const closingRadius = Math.max(8, telegraph.radius * (1 - progress * 0.82));
-      if (!this.presenter.addGroundRing(
+      if (!this.addGroundRing(
         telegraph.x,
         telegraph.y,
         closingRadius,
@@ -376,7 +462,7 @@ export class Renderer {
       if (telegraph.kind === 'ring') {
         const innerColor = progress > 0.72 ? imminentColor : '#ffad58';
         ctx.fillStyle = innerColor;
-        if (!this.presenter.addGroundRing(telegraph.x, telegraph.y, telegraph.radius * 0.72, 3, 40, innerColor, ringAlpha)) {
+        if (!this.addGroundRing(telegraph.x, telegraph.y, telegraph.radius * 0.72, 3, 40, innerColor, ringAlpha)) {
           this.drawPixelRing(screen.x, screen.y, telegraph.radius * 0.72, 3, 40);
         }
       }
@@ -419,11 +505,11 @@ export class Renderer {
     const castAlpha = 0.58 + castCue.progress * 0.4;
     ctx.globalAlpha = castAlpha;
     ctx.fillStyle = '#140b08';
-    if (!this.presenter.addGroundRing(castCue.x, castCue.y, castCue.radius * pulse + 3, 6, 28, '#140b08', castAlpha)) {
+    if (!this.addGroundRing(castCue.x, castCue.y, castCue.radius * pulse + 3, 6, 28, '#140b08', castAlpha)) {
       this.drawPixelRing(screen.x, screen.y, castCue.radius * pulse + 3, 6, 28);
     }
     ctx.fillStyle = color;
-    if (!this.presenter.addGroundRing(
+    if (!this.addGroundRing(
       castCue.x,
       castCue.y,
       castCue.radius * pulse,
@@ -461,6 +547,17 @@ export class Renderer {
       const screen = this.camera.worldToScreen(visual.x, visual.y);
       const progress = 1 - visual.time / Math.max(0.001, visual.maxTime);
       const pulse = 0.82 + Math.sin(progress * Math.PI) * 0.28;
+      if (visual.kind === 'ring') {
+        // The center is a safe pocket: the ice erupts on the damaging annulus.
+        for (let index = 0; index < 8; index += 1) {
+          const angle = index / 8 * TAU;
+          this.drawBossAbilityFrame(visual.bossId, 1,
+            screen.x + Math.cos(angle) * visual.radius * 0.72,
+            screen.y + Math.sin(angle) * visual.radius * 0.72,
+            106, (1 - progress) * 0.88, progress);
+        }
+        continue;
+      }
       this.drawBossAbilityFrame(
         visual.bossId,
         1,
@@ -468,11 +565,13 @@ export class Renderer {
         screen.y,
         visual.radius * 2.35 * pulse,
         Math.sin(Math.min(1, progress) * Math.PI) * 0.92,
+        progress,
       );
     }
   }
 
   private drawUltimateField(scene: RenderScene): void {
+    if (scene.player.character.id === 'titan' && 5 - scene.player.ultimateActive < TITAN_FALL_IMPACT) return;
     const player = scene.player;
     if (player.ultimateActive <= 0) return;
     const screen = this.camera.worldToScreen(player.x, player.y);
@@ -614,7 +713,7 @@ export class Renderer {
       const ringSegments = Math.min(64, Math.max(24, Math.round(radius / 3)));
       ctx.fillStyle = ringColor;
       ctx.globalAlpha = 0.68;
-      if (!this.presenter.addGroundRing(projectile.x, projectile.y, radius, 3, ringSegments, ringColor, 0.68)) {
+      if (!this.addGroundRing(projectile.x, projectile.y, radius, 3, ringSegments, ringColor, 0.68)) {
         this.drawPixelRing(screen.x, screen.y, radius, 3, ringSegments);
       }
       if (projectile.element === 'poison') {
@@ -755,7 +854,8 @@ export class Renderer {
     const ctx = this.context;
     const aftermathLimit = scene.player.bossAftermathActive() ? 320 : Number.POSITIVE_INFINITY;
     let renderedEnemies = 0;
-    const detailRadius = scene.settings.reducedParticles ? 360 : 520;
+    const crowded = scene.enemies.pool.countActive() > 240;
+    const detailRadius = scene.settings.reducedParticles ? 280 : crowded ? 320 : 520;
     const detailRadiusSquared = detailRadius * detailRadius;
     const toxicZones: Projectile[] = [];
     for (const projectile of scene.projectiles.pool.allItems()) {
@@ -763,7 +863,32 @@ export class Renderer {
         toxicZones.push(projectile);
       }
     }
+    const props = this.assets.get(TERRAIN_PROPS_ATLAS_PATH);
+    this.depthQueue.length = 0;
     for (const enemy of scene.enemies.pool.allItems()) {
+      if (enemy.active && this.camera.isVisible(enemy.x, enemy.y, enemy.radius * 4)) this.depthQueue.push(enemy);
+    }
+    for (const feature of scene.terrain.features()) {
+      if (feature.kind !== 'water' && this.camera.isVisible(feature.x, feature.y, 150)) this.depthQueue.push(feature);
+    }
+    this.depthQueue.push(scene.player);
+    this.depthQueue.sort((left, right) => left.y - right.y);
+    for (const actor of this.depthQueue) {
+      if ('character' in actor) {
+        this.drawPlayer(actor, scene.time, scene.settings.reducedParticles);
+        continue;
+      }
+      if (!('config' in actor)) {
+        if (props) {
+          ctx.save();
+          if (scene.player.y < actor.y && Math.abs(scene.player.x - actor.x) < 80
+            && actor.y - scene.player.y < 130) ctx.globalAlpha = 0.42;
+          this.drawTerrainFeature(props, actor);
+          ctx.restore();
+        }
+        continue;
+      }
+      const enemy = actor;
       if (!enemy.active) continue;
       const screen = this.camera.worldToScreen(enemy.x, enemy.y);
       const margin = enemy.radius * 4;
@@ -771,6 +896,7 @@ export class Renderer {
       if (renderedEnemies >= aftermathLimit) continue;
       renderedEnemies += 1;
       const image = this.assets.get(enemy.config.sprite);
+      const bossMotion = enemy.isBoss ? this.assets.get(BOSS_MOTION_PATH) : null;
       const dedicatedBoss = enemy.isBoss && enemy.config.id === 'void-devourer'
         ? this.assets.get(VOID_DEVOURER_SPRITE_PATH)
         : null;
@@ -803,6 +929,10 @@ export class Renderer {
       ctx.save();
       ctx.translate(x, y);
       ctx.globalAlpha = enemy.alpha;
+      ctx.fillStyle = '#01050988';
+      ctx.beginPath();
+      ctx.ellipse(4, enemy.radius * 0.6, enemy.radius * 1.25, enemy.radius * 0.38, 0, 0, TAU);
+      ctx.fill();
       if (enemy.isBoss || enemy.isElite) {
         ctx.fillStyle = enemy.isBoss ? '#ffd76d' : '#e192ff';
         this.drawPixelRing(0, Math.round(enemy.radius * 0.42), enemy.radius + (enemy.isBoss ? 10 : 7), enemy.isBoss ? 4 : 3, enemy.isBoss ? 24 : 16);
@@ -829,7 +959,18 @@ export class Renderer {
         1 - attackMotion * 0.09 - hitHold * 0.04 + squashWave,
       );
       ctx.globalAlpha = enemy.alpha;
-      if (dedicatedBoss) {
+      if (bossMotion) {
+        const frame = scene.boss.animationFrame(scene.time, motion > 4);
+        ctx.save();
+        if (towardPlayerX < -0.05) ctx.scale(-1, 1);
+        this.drawMotionCell(bossMotion, BOSS_ATLAS_INDEX[enemy.config.id] ?? 0, frame, 4, 0, 0, size * 1.18, 0.58);
+        if (enemy.flashTimer > 0) {
+          ctx.globalAlpha *= 0.55;
+          ctx.filter = 'brightness(2)';
+          this.drawMotionCell(bossMotion, BOSS_ATLAS_INDEX[enemy.config.id] ?? 0, frame, 4, 0, 0, size * 1.18, 0.58);
+        }
+        ctx.restore();
+      } else if (dedicatedBoss) {
         this.drawContainedSprite(dedicatedBoss, size * 1.28);
         if (enemy.flashTimer > 0) {
           ctx.save();
@@ -946,6 +1087,17 @@ export class Renderer {
     this.context.drawImage(image, Math.round(-width / 2), Math.round(-height / 2), Math.round(width), Math.round(height));
   }
 
+  private drawMotionCell(image: HTMLImageElement, row: number, frame: number, rows: number,
+    x: number, y: number, size: number, anchor = 0.5): void {
+    const sw = image.naturalWidth / 6;
+    const sh = image.naturalHeight / rows;
+    // Titan's landing poses extend into the padding above its effect row.
+    // Omit that padding while retaining the original ground anchor and scale.
+    const topInset = rows === 3 && row === 2 ? 0.09 : 0;
+    this.context.drawImage(image, clamp(frame, 0, 5) * sw, (row + topInset) * sh, sw, sh * (1 - topInset),
+      Math.round(x - size / 2), Math.round(y - size * (anchor - topInset)), Math.round(size), Math.round(size * (1 - topInset)));
+  }
+
   private drawBossAbilityFrame(
     bossId: string,
     row: number,
@@ -953,7 +1105,17 @@ export class Renderer {
     y: number,
     size: number,
     alpha: number,
+    progress = 0,
   ): void {
+    const motion = this.assets.get(BOSS_IMPACT_PATH);
+    const bossRow = BOSS_ATLAS_INDEX[bossId];
+    if (motion && bossRow !== undefined) {
+      this.context.save();
+      this.context.globalAlpha = clamp(alpha, 0, 1);
+      this.drawMotionCell(motion, bossRow, row === 0 ? 0 : Math.min(5, 2 + Math.floor(progress * 4)), 4, x, y, size);
+      this.context.restore();
+      return;
+    }
     const dedicated = bossId === 'void-devourer' ? this.assets.get(VOID_DEVOURER_ABILITY_PATH) : null;
     if (dedicated) {
       const ctx = this.context;
@@ -986,7 +1148,8 @@ export class Renderer {
   }
 
   private drawSpawnPortals(scene: RenderScene): void {
-    const image = this.assets.get(VOID_DEVOURER_ABILITY_PATH);
+    const motion = this.assets.get(BOSS_IMPACT_PATH);
+    const image = motion ? null : this.assets.get(VOID_DEVOURER_ABILITY_PATH);
     const ctx = this.context;
     for (const enemy of scene.enemies.pool.allItems()) {
       if (!enemy.active || enemy.spawnPortalTime <= 0 || !this.camera.isVisible(enemy.x, enemy.y, enemy.radius * 4)) continue;
@@ -995,7 +1158,8 @@ export class Renderer {
       const size = Math.max(46, enemy.radius * (enemy.isBoss ? 5.8 : 4.1)) * (0.72 + progress * 0.28);
       ctx.save();
       ctx.globalAlpha = 0.46 + (1 - progress) * 0.3;
-      if (image) ctx.drawImage(image, Math.round(screen.x - size / 2), Math.round(screen.y - size / 2), Math.round(size), Math.round(size));
+      if (motion) this.drawMotionCell(motion, 0, Math.min(5, Math.floor(progress * 6)), 4, screen.x, screen.y, size);
+      else if (image) ctx.drawImage(image, Math.round(screen.x - size / 2), Math.round(screen.y - size / 2), Math.round(size), Math.round(size));
       else {
         ctx.fillStyle = '#b45cff';
         this.drawPixelRing(screen.x, screen.y, size * 0.42, 4, 28);
@@ -1463,6 +1627,32 @@ export class Renderer {
     ctx.restore();
   }
 
+  private drawTitanGroundVfx(player: Player): void {
+    const ctx = this.context;
+    if (player.titanRiftImpactTime > 0) {
+      const impact = this.camera.worldToScreen(player.titanRiftImpactX, player.titanRiftImpactY);
+      const impactProgress = 1 - player.titanRiftImpactTime / 0.5;
+      const titanAtlas = this.assets.get(TITAN_ACTION_PATH);
+      if (titanAtlas) {
+        ctx.save();
+        ctx.globalAlpha = 0.7 * (1 - impactProgress * 0.6);
+        this.drawMotionCell(titanAtlas, 2, Math.min(5, Math.floor(impactProgress * 6)), 3, impact.x, impact.y, 370);
+        ctx.restore();
+      } else this.drawGuardianPassiveFrame(7, impact.x, impact.y, 330 + impactProgress * 80, 0.9 - impactProgress * 0.35);
+    }
+    if (player.titanSlamTime > 0) {
+      const atlas = this.assets.get(TITAN_ACTION_PATH);
+      const impact = this.camera.worldToScreen(player.titanSlamX, player.titanSlamY);
+      const progress = 1 - player.titanSlamTime / TITAN_IMPACT_VFX_DURATION;
+      if (atlas) {
+        ctx.save();
+        ctx.globalAlpha = 0.9 * (1 - progress * 0.55);
+        this.drawMotionCell(atlas, 2, Math.min(5, 2 + Math.floor(progress * 4)), 3, impact.x, impact.y, player.titanSlamRadius * 2);
+        ctx.restore();
+      }
+    }
+  }
+
   private drawPlayer(player: Player, time: number, reducedEffects: boolean): void {
     const ctx = this.context;
     const screen = this.camera.worldToScreen(player.x, player.y);
@@ -1527,11 +1717,6 @@ export class Renderer {
     } else if (player.rageActive > 0) {
       this.drawVfxFrame(4, Math.floor(time * 11) % 6, x, y, Math.round(84 * visualScale), 0.46);
     }
-    if (player.titanRiftImpactTime > 0) {
-      const impact = this.camera.worldToScreen(player.titanRiftImpactX, player.titanRiftImpactY);
-      const impactProgress = 1 - player.titanRiftImpactTime / 0.5;
-      this.drawGuardianPassiveFrame(7, impact.x, impact.y, 330 + impactProgress * 80, 0.9 - impactProgress * 0.35);
-    }
     if (player.lightSoldierTime > 0) this.drawLightSoldier(player, x, y, time);
     if (player.rageShield > 0 || player.sealShield > 0 || player.holyShieldLayers > 0 || player.titanRiftShield > 0) {
       const holyShield = player.holyShieldLayers > 0;
@@ -1554,7 +1739,20 @@ export class Renderer {
     this.drawPixelRing(0, Math.round(player.radius * 0.48), player.radius + 8, 3, 28);
 
     const feetY = Math.round(player.radius * 0.72);
-    if (spriteSheet) {
+    const titanAtlas = player.character.id === 'titan' ? this.assets.get(TITAN_ACTION_PATH) : null;
+    const titanCast = titanAtlas && player.actionKind === 'ability' && player.actionTimer > 0
+      && ['active-gravity-breaker', 'ultimate-titanfall'].includes(player.abilityCastKind);
+    if (titanCast && titanAtlas) {
+      const ultimate = player.abilityCastKind === 'ultimate-titanfall';
+      const elapsed = player.actionDuration - player.actionTimer;
+      const frame = titanActionFrame(elapsed, ultimate);
+      const airborne = ultimate && elapsed >= 0.22 && elapsed < TITAN_FALL_IMPACT;
+      const lift = airborne ? Math.sin((elapsed - 0.22) / (TITAN_FALL_IMPACT - 0.22) * Math.PI) * 26 : 0;
+      ctx.save();
+      if (player.actionDirection.x < 0) ctx.scale(-1, 1);
+      this.drawMotionCell(titanAtlas, ultimate ? 1 : 0, frame, 3, 0, feetY - lift, 96 * visualScale, 0.84);
+      ctx.restore();
+    } else if (spriteSheet) {
       const sourceWidth = spriteSheet.naturalWidth || spriteSheet.width;
       const sourceHeight = spriteSheet.naturalHeight || spriteSheet.height;
       const sourceCellWidth = sourceWidth / PLAYER_SPRITE_COLUMNS;

@@ -3,3 +3,10 @@ dist/
 .DS_Store
 *.log
 coverage/
+.qa/
+dist.__build__/
+release/
+# Intermediate screenshots retained locally; final QA images are tracked.
+docs/qa-latest/gameplay-v8-desktop.png
+docs/qa-latest/titan-q-v8.png
+docs/qa-latest/titan-r-v8.png

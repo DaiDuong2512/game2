@@ -1,0 +1,335 @@
+{
+  "characterResults": [
+    {
+      "character": "kael-orin",
+      "casts": 3,
+      "finite": true,
+      "projectiles": 0
+    },
+    {
+      "character": "mira-voss",
+      "casts": 3,
+      "finite": true,
+      "projectiles": 2
+    },
+    {
+      "character": "toren-vale",
+      "casts": 3,
+      "finite": true,
+      "projectiles": 0
+    },
+    {
+      "character": "nyra-sol",
+      "casts": 3,
+      "finite": true,
+      "projectiles": 4
+    },
+    {
+      "character": "zarek",
+      "casts": 3,
+      "finite": true,
+      "projectiles": 11
+    },
+    {
+      "character": "elara",
+      "casts": 3,
+      "finite": true,
+      "projectiles": 13
+    },
+    {
+      "character": "titan",
+      "casts": 3,
+      "finite": true,
+      "projectiles": 0
+    },
+    {
+      "character": "nova",
+      "casts": 3,
+      "finite": true,
+      "projectiles": 23
+    }
+  ],
+  "bossResults": [
+    {
+      "boss": "void-devourer",
+      "phases": [
+        {
+          "phase": 1,
+          "maxHazards": 0,
+          "maxProjectiles": 24,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "phase": 2,
+          "maxHazards": 0,
+          "maxProjectiles": 29,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "phase": 3,
+          "maxHazards": 1,
+          "maxProjectiles": 47,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "finite": true
+    },
+    {
+      "boss": "iron-behemoth",
+      "phases": [
+        {
+          "phase": 1,
+          "maxHazards": 1,
+          "maxProjectiles": 0,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "phase": 2,
+          "maxHazards": 1,
+          "maxProjectiles": 0,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "phase": 3,
+          "maxHazards": 1,
+          "maxProjectiles": 37,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "finite": true
+    },
+    {
+      "boss": "frost-queen",
+      "phases": [
+        {
+          "phase": 1,
+          "maxHazards": 0,
+          "maxProjectiles": 19,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "phase": 2,
+          "maxHazards": 1,
+          "maxProjectiles": 32,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "phase": 3,
+          "maxHazards": 1,
+          "maxProjectiles": 38,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "finite": true
+    },
+    {
+      "boss": "lord-infernus",
+      "phases": [
+        {
+          "phase": 1,
+          "maxHazards": 4,
+          "maxProjectiles": 28,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "phase": 2,
+          "maxHazards": 6,
+          "maxProjectiles": 34,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "phase": 3,
+          "maxHazards": 8,
+          "maxProjectiles": 52,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      ],
+      "finite": true
+    }
+  ],
+  "maps": [
+    {
+      "stage": "glassward-verge",
+      "features": 103
+    },
+    {
+      "stage": "echo-caverns",
+      "features": 110
+    },
+    {
+      "stage": "ashen-ruins",
+      "features": 102
+    },
+    {
+      "stage": "mire-sanctum",
+      "features": 100
+    },
+    {
+      "stage": "sundered-dunes",
+      "features": 103
+    },
+    {
+      "stage": "frostspire",
+      "features": 110
+    },
+    {
+      "stage": "grave-bloom",
+      "features": 105
+    },
+    {
+      "stage": "iron-citadel",
+      "features": 111
+    },
+    {
+      "stage": "ember-core",
+      "features": 112
+    },
+    {
+      "stage": "deep-strata",
+      "features": 107
+    },
+    {
+      "stage": "crystal-arc",
+      "features": 106
+    },
+    {
+      "stage": "verdant-lab",
+      "features": 113
+    },
+    {
+      "stage": "clockwork-bastion",
+      "features": 106
+    },
+    {
+      "stage": "dark-citadel",
+      "features": 98
+    },
+    {
+      "stage": "sky-temple",
+      "features": 105
+    },
+    {
+      "stage": "chaos-gate",
+      "features": 107
+    },
+    {
+      "stage": "void-march",
+      "features": 102
+    },
+    {
+      "stage": "final-realm",
+      "features": 97
+    },
+    {
+      "stage": "rift-heart",
+      "features": 104
+    },
+    {
+      "stage": "eternal-siege",
+      "features": 102
+    }
+  ],
+  "performanceResult": {
+    "backend": "webgl2-compositor",
+    "enemies": 300,
+    "projectiles": 400,
+    "meanSubmitMs": 16.406666666269302,
+    "p95SubmitMs": 25.400000035762787
+  },
+  "mobileResult": {
+    "viewport": [
+      390,
+      844
+    ],
+    "scrollWidth": 390,
+    "backend": "webgl2-compositor"
+  },
+  "fallbackResult": {
+    "backend": "canvas2d"
+  },
+  "failures": []
+}

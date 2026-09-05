@@ -1,0 +1,103 @@
+{
+  "conditions": "60s, 120Hz, stationary targets 100 units away, 18 radius; normalized damage/attack speed, no crit, armor, DoT, passive or terrain. Smoke uses DoT only: zero direct DPS is expected.",
+  "rows": [
+    {
+      "weapon": "rift-blade",
+      "level1Single": 33.04,
+      "level1Crowd": 396.48,
+      "level8Single": 138.3,
+      "level8Crowd": 1659.62
+    },
+    {
+      "weapon": "echo-bow",
+      "level1Single": 23.83,
+      "level1Crowd": 23.83,
+      "level8Single": 398.75,
+      "level8Crowd": 398.75
+    },
+    {
+      "weapon": "pulse-rifle",
+      "level1Single": 47.08,
+      "level1Crowd": 47.08,
+      "level8Single": 392.85,
+      "level8Crowd": 392.85
+    },
+    {
+      "weapon": "phase-darts",
+      "level1Single": 29.23,
+      "level1Crowd": 29.23,
+      "level8Single": 486.07,
+      "level8Crowd": 486.07
+    },
+    {
+      "weapon": "gravity-bomb",
+      "level1Single": 31.72,
+      "level1Crowd": 103.07,
+      "level8Single": 269.97,
+      "level8Crowd": 1392.52
+    },
+    {
+      "weapon": "storm-call",
+      "level1Single": 15.2,
+      "level1Crowd": 43.09,
+      "level8Single": 64.38,
+      "level8Crowd": 487.36
+    },
+    {
+      "weapon": "ember-orb",
+      "level1Single": 43.52,
+      "level1Crowd": 70.82,
+      "level8Single": 365.86,
+      "level8Crowd": 635.14
+    },
+    {
+      "weapon": "frost-shards",
+      "level1Single": 10.62,
+      "level1Crowd": 42.48,
+      "level8Single": 28.14,
+      "level8Crowd": 315.2
+    },
+    {
+      "weapon": "void-laser",
+      "level1Single": 11.76,
+      "level1Crowd": 11.76,
+      "level8Single": 48.09,
+      "level8Crowd": 48.09
+    },
+    {
+      "weapon": "venom-bloom",
+      "level1Single": 0,
+      "level1Crowd": 52.4,
+      "level8Single": 137.75,
+      "level8Crowd": 413.26
+    },
+    {
+      "weapon": "aegis-orbit",
+      "level1Single": 26.98,
+      "level1Crowd": 110.61,
+      "level8Single": 228.53,
+      "level8Crowd": 935.82
+    },
+    {
+      "weapon": "echo-summon",
+      "level1Single": 55.2,
+      "level1Crowd": 55.2,
+      "level8Single": 463.38,
+      "level8Crowd": 463.38
+    },
+    {
+      "weapon": "arcane-nova",
+      "level1Single": 3.85,
+      "level1Crowd": 50.66,
+      "level8Single": 33.1,
+      "level8Crowd": 405.05
+    },
+    {
+      "weapon": "toxic-smoke-bomb",
+      "level1Single": 0,
+      "level1Crowd": 0,
+      "level8Single": 0,
+      "level8Crowd": 0
+    }
+  ]
+}

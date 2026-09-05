@@ -11,6 +11,7 @@ const mime = new Map([
   ['.css', 'text/css; charset=utf-8'], ['.json', 'application/json; charset=utf-8'],
   ['.png', 'image/png'], ['.jpg', 'image/jpeg'], ['.jpeg', 'image/jpeg'],
   ['.svg', 'image/svg+xml'], ['.wav', 'audio/wav'], ['.mp3', 'audio/mpeg'],
+  ['.webp', 'image/webp'],
   ['.map', 'application/json; charset=utf-8'],
 ]);
 

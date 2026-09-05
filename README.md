@@ -1,4 +1,12 @@
-# Riftwarden: Echo Siege — bản 4.0
+# Riftwarden: Echo Siege — bản 4.1
+
+**Bản 4.1.0 — Địa Chấn Thức Tỉnh:** nền đá/biome bám tọa độ thế giới, nước và cây cỏ chuyển động, xếp chiều sâu giữa vật cản và nhân vật; 24 khung boss, 24 khung chiêu boss, 12 tư thế Titan và 6 khung va chạm. Q Titan gây sát thương tại khung nện sau 0,32 giây; R đáp xuống sau 0,56 giây và tạo dư chấn. Sửa vùng trúng chiêu, lực hút, vị trí Mầm Độc và khả năng bám mục tiêu của Tân Tinh. Mira giảm dần lợi ích nội tại sau 100 mạng. Xem số đo và kiểm tra phát hành trong `docs/RELEASE_4_1.md`.
+
+`npm run build:release` tạo **dist gọn**: một bundle JavaScript minify, CSS/JSON rút gọn, chỉ ảnh được dùng, WebP giữ alpha và mã hóa lossless cho atlas chuyển động/hiệu ứng; ảnh trang trí, dự phòng và atlas Titan quá lớn được giảm độ phân giải theo kích thước hiển thị. Build thường `npm run build` giữ module riêng phục vụ kiểm thử. Mẫu HTML phát triển nằm ở `src/index.html`; `index.html` tại gốc là bản triển khai GitHub Pages.
+
+**Chơi ngay:** [GitHub Pages](https://daiduong2512.github.io/game2/) · **Tải dist:** [Release 4.1.0](https://github.com/DaiDuong2512/game2/releases/tag/v4.1.0).
+
+`RELEASE_MANIFEST.sha256` dùng kiểm tra tệp chạy của bản 4.1.0. `FILE_MANIFEST.sha256` giữ nguyên như tài liệu lịch sử của gói cũ, không dùng để xác minh bản mới.
 
 Trò chơi hành động sinh tồn 2D độc lập, chạy ngoại tuyến trên trình duyệt bằng **TypeScript, WebGL2, Canvas 2D, HTML và CSS**. Bản 4.0 định hình bản sắc **Di Vật Khe Nứt**, tổ chức lại bộ vũ khí thành một vũ khí chính và tối đa ba vũ khí phụ, chuẩn hóa đúng ba kỹ năng chủ động `Q`/`E`/`R`, đồng thời tiếp tục nâng cấp chuyển động, hiệu ứng pixel, âm thanh phản hồi và chiến dịch tiếng Việt gồm 20 nhiệm vụ.
 

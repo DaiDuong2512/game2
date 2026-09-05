@@ -1204,6 +1204,12 @@ export class GameManager {
     const offsetY = Math.trunc(this.player.y / 448) * 448;
     this.worldOriginX += offsetX;
     this.worldOriginY += offsetY;
+    this.terrain.rebase(offsetX, offsetY);
+    this.player.titanSlamX -= offsetX;
+    this.player.titanSlamY -= offsetY;
+    this.player.titanRiftImpactX -= offsetX;
+    this.player.titanRiftImpactY -= offsetY;
+    for (const visual of this.boss.getAbilityVisuals()) { visual.x -= offsetX; visual.y -= offsetY; }
     this.player.x -= offsetX;
     this.player.y -= offsetY;
     for (const enemy of this.spawner.pool.allItems()) if (enemy.active) { enemy.x -= offsetX; enemy.y -= offsetY; }

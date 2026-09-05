@@ -151,11 +151,12 @@ export class ProjectileSystem {
         const target = world.nearestEnemy(projectile.x, projectile.y, 360, projectile.hitIds);
         if (target) {
           const desired = normalize(target.x - projectile.x, target.y - projectile.y);
-          const blend = Math.min(1, projectile.homing * movementDt);
-          const current = normalize(projectile.vx, projectile.vy);
-          const direction = normalize(current.x * (1 - blend) + desired.x * blend, current.y * (1 - blend) + desired.y * blend);
-          projectile.vx = direction.x * speed;
-          projectile.vy = direction.y * speed;
+          const currentAngle = Math.atan2(projectile.vy, projectile.vx);
+          const desiredAngle = Math.atan2(desired.y, desired.x);
+          const delta = Math.atan2(Math.sin(desiredAngle - currentAngle), Math.cos(desiredAngle - currentAngle));
+          const turn = Math.max(-projectile.homing * movementDt, Math.min(projectile.homing * movementDt, delta));
+          projectile.vx = Math.cos(currentAngle + turn) * speed;
+          projectile.vy = Math.sin(currentAngle + turn) * speed;
         }
       }
 
@@ -180,7 +181,8 @@ export class ProjectileSystem {
           projectile.y = terrainHit.y;
           const color = terrainHit.feature.kind === 'tree' ? '#7fcf8c' : '#a7b2ba';
           world.particles.burst(terrainHit.x, terrainHit.y, color, 4, 62, 2);
-          this.pool.release(projectile);
+          if (projectile.faction === 'player' && (projectile.explosiveRadius > 0 || projectile.deployAreaDuration > 0)) this.expire(projectile, world);
+          else this.pool.release(projectile);
           return;
         }
       }
@@ -225,7 +227,7 @@ export class ProjectileSystem {
         const pullRadius = Math.max(projectile.explosiveRadius, projectile.radius * 2);
         const nearby = world.enemySpatial.queryCircle(projectile.x, projectile.y, pullRadius);
         for (const enemy of nearby) {
-          if (!enemy.active || enemy.isBoss) continue;
+          if (!enemy.active || enemy.isBoss || distanceSquared(projectile.x, projectile.y, enemy.x, enemy.y) > (pullRadius + enemy.radius) ** 2) continue;
           const direction = normalize(projectile.x - enemy.x, projectile.y - enemy.y);
           enemy.knockbackX += direction.x * projectile.pullStrength * frameDt;
           enemy.knockbackY += direction.y * projectile.pullStrength * frameDt;

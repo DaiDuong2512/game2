@@ -63,12 +63,12 @@ const WEAPON_BALANCE_DAMAGE_MULTIPLIERS: Readonly<Record<WeaponConfig['behavior'
   bomb: 1.18,
   lightning: 1.14,
   fireball: 1.15,
-  ice: 1.18,
-  laser: 1.12,
+  ice: 1.35,
+  laser: 2.1,
   poison: 1.2,
   'poison-bomb': 1.18,
-  orbit: 1.16,
-  summon: 1.15,
+  orbit: 1.08,
+  summon: 1.03,
   nova: 1.18,
 };
 
@@ -549,7 +549,9 @@ class DataDrivenWeapon extends WeaponBase<WeaponWorld> {
     const level = this.levelData();
     for (let index = 0; index < count; index += 1) {
       const angle = Math.atan2(aim.y, aim.x) + (index - (count - 1) / 2) * 0.5;
-      const spread = 80 + index * 22;
+      // The first bloom covers the selected enemy; extra blooms spread inside
+      // their own footprint instead of leaving a dead zone around the target.
+      const spread = index === 0 ? 0 : Math.min(level.size * 0.65, 18 + index * 12);
       const x = target ? target.x + Math.cos(angle + 1.7) * spread : world.player.x + Math.cos(angle) * range * 0.55;
       const y = target ? target.y + Math.sin(angle + 1.7) * spread : world.player.y + Math.sin(angle) * range * 0.55;
       const hit = this.rollDamage(world, evolution);
@@ -780,7 +782,7 @@ class DataDrivenWeapon extends WeaponBase<WeaponWorld> {
         life: range / Math.max(1, speed),
         pierce: level.pierce,
         maxRange: range,
-        homing: 0,
+        homing: 2.4,
         explosiveRadius: supernova ? level.size * 2.6 : 0,
         statusChance: this.statusChance(level.statusChance),
         knockback: level.knockback,

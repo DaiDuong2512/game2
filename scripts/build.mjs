@@ -1,4 +1,4 @@
-import { cp, mkdir, rm, copyFile, rename, writeFile } from 'node:fs/promises';
+import { cp, mkdir, rm, copyFile, rename, writeFile, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
@@ -8,6 +8,9 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const staging = path.join(root, 'dist.__build__');
+for (const target of [dist, staging]) {
+  if (path.dirname(path.resolve(target)) !== root) throw new Error('Unsafe build output path');
+}
 const localTsc = path.join(root, 'node_modules', 'typescript', 'bin', 'tsc');
 const hasLocalTsc = existsSync(localTsc);
 const tsc = hasLocalTsc ? process.execPath : (process.platform === 'win32' ? 'tsc.cmd' : 'tsc');
@@ -33,14 +36,18 @@ if (result.status !== 0) {
   process.exit(result.status ?? 1);
 }
 
-await copyFile(path.join(root, 'index.html'), path.join(staging, 'index.html'));
+await copyFile(path.join(root, 'src', 'index.html'), path.join(staging, 'index.html'));
 await copyFile(path.join(root, 'src', 'styles.css'), path.join(staging, 'styles.css'));
 await cp(path.join(root, 'public'), staging, { recursive: true });
 await writeFile(
   path.join(staging, 'build-info.json'),
-  JSON.stringify({ version: '4.0.2', builtAt: new Date().toISOString() }, null, 2),
+  JSON.stringify({ version: JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8')).version, builtAt: new Date().toISOString() }, null, 2),
   'utf8',
 );
+if (process.argv.includes('--release')) {
+  const { compactRelease } = await import('./compact-release.mjs');
+  await compactRelease(staging);
+}
 await rm(dist, { recursive: true, force: true });
 await rename(staging, dist);
 console.log(`Đã tạo bản dựng Riftwarden: Echo Siege -> ${dist}`);

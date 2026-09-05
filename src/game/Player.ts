@@ -3,6 +3,7 @@ import { clamp, normalize, smoothLerp } from '../core/MathUtils.js';
 import type { CharacterConfig, MetaUpgradeConfig, SaveData, Vec2, WeaponBehavior } from '../core/Types.js';
 import type { RNG } from '../core/RNG.js';
 import { PlayerStats } from './PlayerStats.js';
+import { TITAN_BREAKER_DURATION, TITAN_FALL_DURATION } from './CombatTiming.js';
 
 const DASH_DURATION = 0.18;
 const DASH_START_SPEED = 940;
@@ -106,6 +107,10 @@ export class Player {
   public titanRiftImpactTime = 0;
   public titanRiftImpactX = 0;
   public titanRiftImpactY = 0;
+  public titanSlamTime = 0;
+  public titanSlamX = 0;
+  public titanSlamY = 0;
+  public titanSlamRadius = 0;
   public lightSoldierTime = 0;
   public lightSoldierAngle = 0;
   public rageExtraProjectiles = 0;
@@ -164,6 +169,7 @@ export class Player {
     this.activeCooldown = Math.max(0, this.activeCooldown - dt);
     this.titanRiftShieldTime = Math.max(0, this.titanRiftShieldTime - dt);
     this.titanRiftImpactTime = Math.max(0, this.titanRiftImpactTime - dt);
+    this.titanSlamTime = Math.max(0, this.titanSlamTime - dt);
     if (this.titanRiftShieldTime <= 0) this.titanRiftShield = 0;
     const ultimateWasActive = this.ultimateActive > 0;
     const ultimateStep = ultimateWasActive ? Math.min(dt, this.ultimateActive) : 0;
@@ -371,11 +377,16 @@ export class Player {
   }
 
   public triggerAbilityCast(kind: string, directionOverride?: Vec2): void {
+    // Rage can start during a slam without erasing its committed pose.
+    if (kind.startsWith('rage-') && this.character.id === 'titan'
+      && this.actionKind === 'ability' && this.actionTimer > 0) return;
     const source = directionOverride ?? this.aim;
     const aimMagnitude = Math.hypot(source.x, source.y);
     const direction = aimMagnitude > 0.05 ? normalize(source.x, source.y) : this.lastMove;
     this.actionKind = 'ability';
-    this.actionDuration = kind === 'ultimate' || kind.startsWith('ultimate-') ? 0.52
+    this.actionDuration = kind === 'ultimate-titanfall' ? TITAN_FALL_DURATION
+      : kind === 'active-gravity-breaker' ? TITAN_BREAKER_DURATION
+      : kind === 'ultimate' || kind.startsWith('ultimate-') ? 0.52
       : kind === 'rage' || kind.startsWith('rage-') ? 0.42 : 0.38;
     this.actionTimer = this.actionDuration;
     this.actionAngle = Math.atan2(direction.y, direction.x);

@@ -11,6 +11,7 @@ import type {
 import type { WeaponWorld } from './WeaponSystem.js';
 import type { Enemy } from './Entities.js';
 import { RAGE_ACTIVATION_THRESHOLD, ULTIMATE_ACTIVATION_THRESHOLD } from './Player.js';
+import { inDamageCircle, TITAN_BREAKER_IMPACT, TITAN_FALL_IMPACT, TITAN_IMPACT_VFX_DURATION } from './CombatTiming.js';
 
 export interface SkillWorld extends WeaponWorld {
   input: InputManager;
@@ -37,8 +38,21 @@ export class SkillSystem {
   private ultimateRegenTick = 1;
   private rageWasActive = false;
   private ultimateWasActive = false;
+  private breakerDelay = 0;
+  private breakerPrimary: PrimarySkillContext | null = null;
 
   public update(dt: number, world: SkillWorld): void {
+    if (this.breakerPrimary) {
+      this.breakerDelay -= dt;
+      if (this.breakerDelay <= 0) {
+        const primary = this.breakerPrimary;
+        this.breakerPrimary = null;
+        this.resolveGravityBreaker(world, primary);
+      }
+    }
+    const titanCommitted = world.player.character.id === 'titan'
+      && world.player.actionKind === 'ability' && world.player.actionTimer > 0
+      && ['active-gravity-breaker', 'ultimate-titanfall'].includes(world.player.abilityCastKind);
     const rageActiveAtFrameStart = world.player.rageActive > 0;
     if (this.rageWasActive && !rageActiveAtFrameStart) this.playRageAudio(world, 'end', 0.72);
     this.rageWasActive = rageActiveAtFrameStart;
@@ -50,7 +64,7 @@ export class SkillSystem {
     this.ultimateWasActive = ultimateActiveAtFrameStart;
 
     const dashPressed = world.input.wasPressed('Space') || world.input.gamepadPressed(0);
-    if (dashPressed && world.player.tryDash()) {
+    if (dashPressed && !titanCommitted && world.player.tryDash()) {
       world.audio.play('dash');
       world.particles.ring(world.player.x, world.player.y, '#65d7cb', 42, 0.28);
       world.particles.burst(world.player.x, world.player.y, '#65d7cb', 12, 170, 3);
@@ -58,7 +72,7 @@ export class SkillSystem {
     }
 
     const activePressed = world.input.wasPressed('KeyQ') || world.input.gamepadPressed(2);
-    if (activePressed && world.player.activeCooldown <= 0) this.castActive(world);
+    if (activePressed && world.player.activeCooldown <= 0 && !titanCommitted) this.castActive(world);
 
     const ragePressed = world.input.wasPressed('KeyE') || world.input.gamepadPressed(1);
     if (ragePressed) {
@@ -81,9 +95,9 @@ export class SkillSystem {
 
     const ultimatePressed = world.input.wasPressed('KeyR') || world.input.gamepadPressed(3);
     let ultimateStartedThisFrame = false;
-    if (ultimatePressed) {
+    if (ultimatePressed && !titanCommitted && !this.breakerPrimary) {
       if (world.player.consumeUltimate()) {
-        this.ultimateTick = 0;
+        this.ultimateTick = world.player.character.ultimate?.kind === 'titanfall' ? TITAN_FALL_IMPACT : 0;
         this.ultimatePulseIndex = 0;
         this.ultimateRegenTick = 1;
         this.ultimateWasActive = true;
@@ -91,6 +105,7 @@ export class SkillSystem {
         this.playUltimateAudio(world, 'cast', 0.98);
         const ultimate = world.player.character.ultimate;
         world.player.triggerAbilityCast(`ultimate-${ultimate?.kind ?? 'rift-storm'}`);
+        if (ultimate?.kind === 'titanfall') world.player.invulnerable = Math.max(world.player.invulnerable, TITAN_FALL_IMPACT);
         world.toast(`${ultimate?.name ?? 'TUYỆT KỸ'} — ${ultimate?.description ?? 'Giải phóng toàn bộ năng lượng.'}`);
         this.emitUltimateCast(world, ultimate?.kind ?? 'rift-storm');
         world.screenShake(6);
@@ -107,7 +122,7 @@ export class SkillSystem {
           this.playUltimateAudio(world, 'regen', 0.58);
         }
       }
-      this.ultimateTick -= dt;
+      if (!ultimateStartedThisFrame) this.ultimateTick -= dt;
       if (this.ultimateTick <= 0) {
         this.ultimateTick = this.ultimateInterval(world.player.character.ultimate?.kind ?? 'rift-storm');
         this.castUltimatePulse(world);
@@ -166,13 +181,8 @@ export class SkillSystem {
         this.castEchoPack(world, primary);
         break;
       case 'gravity-breaker':
-        this.damageArea(world, 205 * range, 70, primary.element ?? 'physical', 'active-gravity-breaker', 1, 340, primary, (enemy) => {
-          const direction = normalize(enemy.x - world.player.x, enemy.y - world.player.y);
-          const force = enemy.isBoss ? 30 : enemy.isElite ? 90 : 190;
-          enemy.knockbackX += direction.x * force;
-          enemy.knockbackY += direction.y * force;
-          enemy.status.stunTime = Math.max(enemy.status.stunTime, enemy.isBoss ? 0.1 : enemy.isElite ? 0.3 : 0.62);
-        });
+        this.breakerPrimary = primary;
+        this.breakerDelay = TITAN_BREAKER_IMPACT;
         break;
       case 'astral-fold':
         this.damageArea(world, 300 * range, 50, primary.element ?? 'arcane', 'active-astral-fold', 1, 0, primary, (enemy) => {
@@ -192,8 +202,30 @@ export class SkillSystem {
     }
     world.player.activeCooldown = world.player.activeCooldownDuration();
     this.playClassSkillAudio(world, kind, 0.88);
-    this.emitActiveCast(world, kind);
-    world.screenShake(4);
+    if (kind !== 'gravity-breaker') {
+      this.emitActiveCast(world, kind);
+      world.screenShake(4);
+    } else world.particles.ring(world.player.x, world.player.y, '#f4c976', 40, TITAN_BREAKER_IMPACT);
+  }
+
+  private resolveGravityBreaker(world: SkillWorld, primary: PrimarySkillContext): void {
+    const radius = 205 * world.player.stats.get('range');
+    this.damageArea(world, radius, 78, primary.element ?? 'physical', 'active-gravity-breaker', 1, 220, primary, (enemy) => {
+      enemy.status.stunTime = Math.max(enemy.status.stunTime, enemy.isBoss ? 0.1 : enemy.isElite ? 0.3 : 0.62);
+    });
+    this.emitTitanImpact(world, radius);
+    this.playClassSkillAudio(world, 'gravity-breaker', 0.95);
+    world.screenShake(5);
+  }
+
+  private emitTitanImpact(world: SkillWorld, radius: number): void {
+    const player = world.player;
+    player.titanSlamTime = TITAN_IMPACT_VFX_DURATION;
+    player.titanSlamX = player.x;
+    player.titanSlamY = player.y;
+    player.titanSlamRadius = radius;
+    world.particles.ring(player.x, player.y, '#f6cf85', radius, 0.44);
+    world.particles.burst(player.x, player.y, '#c99762', 18, 190, 4);
   }
 
   private primarySkillContext(world: SkillWorld): PrimarySkillContext {
@@ -232,7 +264,7 @@ export class SkillSystem {
     let totalDamage = 0;
     const candidates = world.enemySpatial.queryCircle(world.player.x, world.player.y, radius);
     for (const enemy of candidates) {
-      if (!enemy.active) continue;
+      if (!enemy.active || !inDamageCircle(world.player.x, world.player.y, radius, enemy)) continue;
       const critical = this.rollSkillCritical(world);
       const damage = baseDamage * primary.damageMultiplier * world.player.effectiveDamageMultiplier()
         * (critical ? world.player.skillCritDamage() : 1);
@@ -315,8 +347,8 @@ export class SkillSystem {
     this.ultimatePulseIndex += 1;
     const candidates = world.enemySpatial.queryCircle(world.player.x, world.player.y, radius);
     for (const enemy of candidates) {
-      if (!enemy.active) continue;
-      const baseDamage = (kind === 'titanfall' ? (pulseIndex === 0 ? 92 : 18)
+      if (!enemy.active || !inDamageCircle(world.player.x, world.player.y, radius, enemy)) continue;
+      const baseDamage = (kind === 'titanfall' ? (pulseIndex === 0 ? 140 : 24)
         : kind === 'arrow-rain' ? 26
           : kind === 'forgequake' ? 32
             : kind === 'elemental-tempest' ? 24
@@ -535,9 +567,7 @@ export class SkillSystem {
         }
         break;
       case 'titanfall':
-        world.particles.spawnStatusAtlas?.(1, x, y, 286, 0.82, 1);
-        world.particles.spawnAtlas?.(1, x, y, 210, 0.62, 0.9);
-        this.emitRadialCracks(world, x, y, 315, '#ffd27a', 16, 8, 0.08);
+        world.particles.ring(x, y, '#f4c976', 52, TITAN_FALL_IMPACT);
         break;
       case 'void-collapse':
         world.particles.spawnAtlas?.(3, x, y, 284, 0.86, 1, true);
@@ -605,9 +635,7 @@ export class SkillSystem {
         world.particles.spawnAtlas?.(3, x, y, 104, 0.3, 0.72, pulseIndex % 2 === 0);
         break;
       case 'titanfall':
-        if (pulseIndex === 0) world.particles.spawnStatusAtlas?.(1, x, y, 278, 0.68, 0.94);
-        else world.particles.spawnAtlas?.(1, x, y, 138, 0.34, 0.94);
-        if (pulseIndex === 0) this.emitRadialCracks(world, x, y, radius * 0.88, '#ffe093', 18, 8, 0.04);
+        this.emitTitanImpact(world, pulseIndex === 0 ? radius : radius * 0.8);
         break;
       case 'void-collapse':
         world.particles.spawnAtlas?.(3, x, y, 132 + pulseIndex % 3 * 18, 0.4, 0.76, true);

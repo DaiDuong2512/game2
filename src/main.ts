@@ -67,13 +67,13 @@ async function bootstrap(): Promise<void> {
       'assets/generated/effects/status-impact-vfx-v3.png',
       'assets/generated/effects/toxic-smoke-vfx-v4.png',
       'assets/generated/effects/projectile-atlas-v2.png',
-    'assets/generated/effects/guardian-passive-atlas-v1.png',
-    'assets/generated/bosses-v2/boss-character-atlas-v2.png',
-    'assets/generated/bosses-v2/boss-ability-atlas-v1.png',
-    'assets/generated/bosses-v3/void-devourer-v3.png',
-    'assets/generated/bosses-v3/void-devourer-ability-v2.png',
-    'assets/generated/terrain-v1/terrain-props-atlas-v1.png',
-    'assets/generated/terrain-v1/terrain-grass-atlas-v1.png',
+      'assets/generated/effects/guardian-passive-atlas-v1.png',
+      'assets/generated/terrain-v1/terrain-props-atlas-v1.png',
+      'assets/generated/terrain-v1/terrain-grass-atlas-v1.png',
+      'assets/generated/combat-v8/boss-motion.png',
+      'assets/generated/combat-v8/boss-impact.png',
+      'assets/generated/combat-v8/titan-actions.png',
+      'assets/generated/combat-v8/ground-tiles.png',
       ...data.characters.map((item) => item.portrait),
       ...data.characters.map((item) => item.gameplaySprite ?? ''),
       ...data.weapons.map((item) => item.icon),
@@ -82,6 +82,14 @@ async function bootstrap(): Promise<void> {
       ...data.passives.map((item) => item.icon),
     ];
     await assets.preload(paths.filter((path) => path.length > 0).map((path) => `./${path}`));
+    if (!assets.get('assets/generated/combat-v8/boss-motion.png') || !assets.get('assets/generated/combat-v8/boss-impact.png')) {
+      await assets.preload([
+        'assets/generated/bosses-v2/boss-character-atlas-v2.png',
+        'assets/generated/bosses-v2/boss-ability-atlas-v1.png',
+        'assets/generated/bosses-v3/void-devourer-v3.png',
+        'assets/generated/bosses-v3/void-devourer-ability-v2.png',
+      ]);
+    }
     const save = new SaveSystem();
     const game = new GameManager(data, save, assets, canvas, screenRoot, hudRoot, toastRoot);
     installMobileControls(game);

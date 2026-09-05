@@ -4,15 +4,15 @@ import { readFile } from 'node:fs/promises';
 
 const root = new URL('../', import.meta.url);
 
-test('gói phát hành và bản dựng cùng mang phiên bản 4.0.2', async () => {
+test('gói phát hành và bản dựng cùng mang phiên bản 4.1.0', async () => {
   const [packageJson, buildInfo, readme] = await Promise.all([
     readFile(new URL('package.json', root), 'utf8').then(JSON.parse),
     readFile(new URL('dist/build-info.json', root), 'utf8').then(JSON.parse),
     readFile(new URL('README.md', root), 'utf8'),
   ]);
-  assert.equal(packageJson.version, '4.0.2');
-  assert.equal(buildInfo.version, '4.0.2');
-  assert.match(readme, /Riftwarden: Echo Siege — bản 4\.0/u);
+  assert.equal(packageJson.version, '4.1.0');
+  assert.equal(buildInfo.version, packageJson.version);
+  assert.match(readme, /Riftwarden: Echo Siege — bản 4\.1/u);
 });
 
 test('vòng chơi nối đầy đủ briefing, truyền tin, giao tranh cuối và đoạn kết', async () => {
@@ -63,7 +63,7 @@ test('icon ứng dụng v2 và atlas đạn đạo v2 dùng đúng asset product
   const [icon, atlas, html, main, renderer] = await Promise.all([
     readFile(new URL('public/assets/generated/app-icon-v2.png', root)),
     readFile(new URL('public/assets/generated/effects/projectile-atlas-v2.png', root)),
-    readFile(new URL('index.html', root), 'utf8'),
+    readFile(new URL('src/index.html', root), 'utf8'),
     readFile(new URL('src/main.ts', root), 'utf8'),
     readFile(new URL('src/render/Renderer.ts', root), 'utf8'),
   ]);

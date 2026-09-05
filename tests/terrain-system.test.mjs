@@ -92,7 +92,8 @@ test('renderer uses bitmap terrain atlases and no square-grid shader', async () 
   ]);
   assert.match(renderer, /terrain-props-atlas-v1\.png/u);
   assert.match(renderer, /terrain-grass-atlas-v1\.png/u);
-  assert.match(renderer, /this\.assets\.get\(stage\.thumbnail\)/u);
+  assert.match(renderer, /this\.assets\.get\(GROUND_TEXTURE_PATH\)/u);
+  assert.match(renderer, /groundPatterns/u);
   assert.match(renderer, /terrain\.decorations\(\)/u);
   assert.doesNotMatch(presenter, /gridCell|minorGrid|majorGrid|landmarkMark/u);
   assert.match(main, /terrain-props-atlas-v1\.png/u);

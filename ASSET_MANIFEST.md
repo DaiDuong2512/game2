@@ -1,4 +1,8 @@
-# Danh mục tài sản — Riftwarden: Echo Siege 4.0
+# Danh mục tài sản — Riftwarden: Echo Siege 4.1
+
+## Bộ chuyển động và môi trường 4.1.0
+
+Thư mục `public/assets/generated/combat-v8/` bổ sung `boss-motion.png` (24 tư thế), `boss-impact.png` (24 khung chiêu), `titan-actions.png` (12 tư thế + 6 khung va chạm), `ground-tiles.png` (4 nền biome). Ảnh tạo bằng image_gen tích hợp, đã kiểm tra alpha thật và tích hợp trong game. Bản dist dùng WebP; PNG nguồn được giữ trong public. [Kích thước, đường dẫn và prompt cuối](docs/ASSET_PROMPTS_4_1.md).
 
 Toàn bộ hình ảnh trong dự án là tài sản gốc hoặc biến thể được tạo riêng cho **Riftwarden: Echo Siege**. Game không yêu cầu gói asset trả phí hay tài sản của trò chơi thương mại khác.
 

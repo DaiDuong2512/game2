@@ -1,0 +1,26 @@
+{
+  "url": "http://localhost:4173/?qa=1&seed=1337",
+  "initial": {
+    "x": 260,
+    "y": 30,
+    "alpha": 0,
+    "t": 0.6633,
+    "casts": 0
+  },
+  "qPose": {
+    "kind": "active-gravity-breaker",
+    "duration": 0.64
+  },
+  "final": {
+    "x": 261.22098542407406,
+    "y": -60.64664011759419,
+    "alpha": 1,
+    "t": 6.012900000000011,
+    "casts": 2,
+    "health": 195.8,
+    "playerX": 29.39364408690032,
+    "state": "level-up",
+    "backend": "webgl2-compositor"
+  },
+  "errors": []
+}

@@ -33,7 +33,7 @@ test('all renderer entry points present their completed frame', () => {
   assert.match(rendererSource, /public renderBackend\(\): RenderBackend/u);
 });
 
-test('high-volume ground rings are packed into the existing WebGL draw batch', () => {
+test('ground rings use the WebGL batch when no opaque texture covers it', () => {
   assert.match(presenterSource, /const MAX_GROUND_RINGS = 48/u);
   assert.match(presenterSource, /public addGroundRing\(/u);
   assert.match(presenterSource, /uniform vec4 uRingGeometry\[/u);
@@ -42,7 +42,8 @@ test('high-volume ground rings are packed into the existing WebGL draw batch', (
   assert.match(presenterSource, /estimatedCanvasCommandsAvoided/u);
   assert.match(presenterSource, /public stats\(\): GpuRenderStats/u);
   assert.equal((presenterSource.match(/gl\.drawArrays\(/gu) ?? []).length, 1);
-  assert.match(rendererSource, /this\.presenter\.addGroundRing\(\s*telegraph\.x/u);
-  assert.match(rendererSource, /this\.presenter\.addGroundRing\(projectile\.x, projectile\.y/u);
+  assert.match(rendererSource, /this\.addGroundRing\(\s*telegraph\.x/u);
+  assert.match(rendererSource, /this\.addGroundRing\(projectile\.x, projectile\.y/u);
+  assert.match(rendererSource, /if \(this\.assets\.get\(GROUND_TEXTURE_PATH\)\) return false/u);
   assert.match(rendererSource, /public gpuStats\(\): GpuRenderStats/u);
 });

@@ -232,7 +232,7 @@ export class EnemySystem {
           enemy.abilityTimer = 4.2;
           const nearby = world.enemySpatial.queryCircle(enemy.x, enemy.y, 220);
           for (const ally of nearby) {
-            if (!ally.active || ally.id === enemy.id) continue;
+            if (!ally.active || ally.id === enemy.id || distanceSquared(ally.x, ally.y, enemy.x, enemy.y) > (220 + ally.radius) ** 2) continue;
             this.healEnemy(ally, ally.maxHealth * 0.12);
           }
           world.particles.ring(enemy.x, enemy.y, '#6ee48e', 220, 0.55);

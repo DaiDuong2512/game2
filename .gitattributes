@@ -1,0 +1,8 @@
+# Preserve the exact release bytes verified by RELEASE_MANIFEST.sha256.
+/app.js -text
+/index.html -text
+/styles.css -text
+/build-info.json -text
+/RELEASE_MANIFEST.sha256 -text
+/data/** -text
+/assets/** binary

@@ -61,7 +61,7 @@ test('all player-visible data strings are non-empty, valid NFC text and Vietname
 
 test('entry shell and major UI states do not regress to English copy', async () => {
   const [html, uiSource, mainSource] = await Promise.all([
-    readFile(new URL('../index.html', import.meta.url), 'utf8'),
+    readFile(new URL('../src/index.html', import.meta.url), 'utf8'),
     readFile(new URL('../src/ui/UIManager.ts', import.meta.url), 'utf8'),
     readFile(new URL('../src/main.ts', import.meta.url), 'utf8'),
   ]);

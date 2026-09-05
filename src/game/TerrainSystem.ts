@@ -39,6 +39,13 @@ export const TERRAIN_CELL_SIZE = 300;
 export const TERRAIN_GRASS_CELL_SIZE = 150;
 export const WATER_MOVEMENT_MULTIPLIER = 0.58;
 
+export function terrainBiome(stage: StageConfig): number {
+  if (/frost|sky-temple|crystal|glassward/.test(stage.id)) return 2;
+  if (/ember|ashen|iron|dunes|clockwork/.test(stage.id)) return 1;
+  if (/void|rift-heart|chaos|dark|final|eternal|deep/.test(stage.id)) return 3;
+  return 0;
+}
+
 function mixedHash(stageIndex: number, cellX: number, cellY: number): number {
   let value = Math.imul(cellX, 0x45d9f3b) ^ Math.imul(cellY, 0x119de1f3) ^ Math.imul(stageIndex, 0x27d4eb2d);
   value ^= value >>> 16;
@@ -82,6 +89,8 @@ function segmentCircleEntry(
  */
 export class TerrainSystem {
   public readonly stage: StageConfig;
+  public originX = 0;
+  public originY = 0;
   private visible: TerrainFeature[] = [];
   private visibleDecorations: TerrainDecoration[] = [];
   private cacheX = Number.POSITIVE_INFINITY;
@@ -91,6 +100,14 @@ export class TerrainSystem {
 
   public constructor(stage: StageConfig) {
     this.stage = stage;
+  }
+
+  public rebase(x: number, y: number): void {
+    this.originX += x;
+    this.originY += y;
+    for (const feature of this.visible) { feature.x -= x; feature.y -= y; }
+    for (const decoration of this.visibleDecorations) { decoration.x -= x; decoration.y -= y; }
+    this.cacheX = Number.POSITIVE_INFINITY;
   }
 
   public update(centerX: number, centerY: number, viewport: { width: number; height: number }): void {
@@ -108,10 +125,10 @@ export class TerrainSystem {
     this.cacheHeight = height;
     const rangeX = width * 0.95 + TERRAIN_CELL_SIZE;
     const rangeY = height * 0.95 + TERRAIN_CELL_SIZE;
-    const minX = Math.floor((centerX - rangeX) / TERRAIN_CELL_SIZE);
-    const maxX = Math.ceil((centerX + rangeX) / TERRAIN_CELL_SIZE);
-    const minY = Math.floor((centerY - rangeY) / TERRAIN_CELL_SIZE);
-    const maxY = Math.ceil((centerY + rangeY) / TERRAIN_CELL_SIZE);
+    const minX = Math.floor((centerX + this.originX - rangeX) / TERRAIN_CELL_SIZE);
+    const maxX = Math.ceil((centerX + this.originX + rangeX) / TERRAIN_CELL_SIZE);
+    const minY = Math.floor((centerY + this.originY - rangeY) / TERRAIN_CELL_SIZE);
+    const maxY = Math.ceil((centerY + this.originY + rangeY) / TERRAIN_CELL_SIZE);
     const features: TerrainFeature[] = [];
     for (let cellX = minX; cellX <= maxX; cellX += 1) {
       for (let cellY = minY; cellY <= maxY; cellY += 1) {
@@ -157,7 +174,8 @@ export class TerrainSystem {
         if (distance < 0.001) {
           dx = previousX - feature.x;
           dy = previousY - feature.y;
-          distance = Math.max(0.001, Math.hypot(dx, dy));
+          distance = Math.hypot(dx, dy);
+          if (distance < 0.001) { dx = 1; dy = 0; distance = 1; }
         }
         const normalX = dx / distance;
         const normalY = dy / distance;
@@ -221,11 +239,11 @@ export class TerrainSystem {
     return {
       id: mixedHash(this.stage.index + 211, cellX, cellY),
       kind,
-      x,
-      y,
+      x: x - this.originX,
+      y: y - this.originY,
       radius,
       radiusY: kind === 'water' ? 54 : radius,
-      variant: (this.stage.index - 1 + ((hash >>> 20) & 3)) % 4,
+      variant: terrainBiome(this.stage),
     };
   }
 
@@ -239,10 +257,10 @@ export class TerrainSystem {
   ): TerrainDecoration[] {
     const rangeX = width * 0.72 + TERRAIN_GRASS_CELL_SIZE;
     const rangeY = height * 0.72 + TERRAIN_GRASS_CELL_SIZE;
-    const minX = Math.floor((centerX - rangeX) / TERRAIN_GRASS_CELL_SIZE);
-    const maxX = Math.ceil((centerX + rangeX) / TERRAIN_GRASS_CELL_SIZE);
-    const minY = Math.floor((centerY - rangeY) / TERRAIN_GRASS_CELL_SIZE);
-    const maxY = Math.ceil((centerY + rangeY) / TERRAIN_GRASS_CELL_SIZE);
+    const minX = Math.floor((centerX + this.originX - rangeX) / TERRAIN_GRASS_CELL_SIZE);
+    const maxX = Math.ceil((centerX + this.originX + rangeX) / TERRAIN_GRASS_CELL_SIZE);
+    const minY = Math.floor((centerY + this.originY - rangeY) / TERRAIN_GRASS_CELL_SIZE);
+    const maxY = Math.ceil((centerY + this.originY + rangeY) / TERRAIN_GRASS_CELL_SIZE);
     const decorations: TerrainDecoration[] = [];
     for (let cellX = minX; cellX <= maxX; cellX += 1) {
       for (let cellY = minY; cellY <= maxY; cellY += 1) {
@@ -251,8 +269,8 @@ export class TerrainSystem {
         if (unitFromHash(hash) < 0.14) continue;
         const jitterX = unitFromHash(mixedHash(this.stage.index + 443, cellX, cellY));
         const jitterY = unitFromHash(mixedHash(this.stage.index + 487, cellX, cellY));
-        const x = cellX * TERRAIN_GRASS_CELL_SIZE + 28 + jitterX * (TERRAIN_GRASS_CELL_SIZE - 56);
-        const y = cellY * TERRAIN_GRASS_CELL_SIZE + 28 + jitterY * (TERRAIN_GRASS_CELL_SIZE - 56);
+        const x = cellX * TERRAIN_GRASS_CELL_SIZE + 28 + jitterX * (TERRAIN_GRASS_CELL_SIZE - 56) - this.originX;
+        const y = cellY * TERRAIN_GRASS_CELL_SIZE + 28 + jitterY * (TERRAIN_GRASS_CELL_SIZE - 56) - this.originY;
         const overlapsFeature = features.some((feature) => {
           const padding = feature.kind === 'water' ? 24 : 18;
           const dx = (x - feature.x) / (feature.radius + padding);
@@ -264,7 +282,7 @@ export class TerrainSystem {
           id: mixedHash(this.stage.index + 523, cellX, cellY),
           x,
           y,
-          variant: (this.stage.index - 1 + ((hash >>> 17) & 7)) % 8,
+          variant: (terrainBiome(this.stage) === 3 ? 7 : terrainBiome(this.stage)) + (terrainBiome(this.stage) < 3 && ((hash >>> 17) & 1) ? 4 : 0),
           scale: 0.72 + unitFromHash(mixedHash(this.stage.index + 571, cellX, cellY)) * 0.38,
           rotation: (unitFromHash(mixedHash(this.stage.index + 613, cellX, cellY)) - 0.5) * 0.28,
         });

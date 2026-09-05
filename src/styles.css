@@ -1147,12 +1147,13 @@ select,
     left: max(6px, env(safe-area-inset-left));
     top: max(6px, env(safe-area-inset-top));
     display: grid;
-    grid-template-columns: 166px;
+    grid-template-columns: min(216px, calc(100vw - 120px));
     grid-template-areas: "player" "dash";
     gap: 4px;
   }
   .hud-top-left .stage-chip { display: none; }
-  .hud-top-left .hud-panel { min-width: 166px; }
+  .hud-top-left .hud-panel { min-width: 0; width: 100%; padding-right: 14px; }
+  .hud-top-left .player-bars { min-width: 0; }
   .dash-resource { width: 160px; min-height: 27px; grid-template-columns: 42px 35px 1fr; padding-block: 3px; }
   .dash-key, .dash-label { font-size: 8px; }
   .dash-state { font-size: 7px; }
@@ -1191,6 +1192,10 @@ select,
     gap: 4px;
   }
   .skill-button { width: 64px; min-height: 98px; grid-template-rows: 10px 33px auto auto 3px; padding: 6px 4px 5px; }
+  .skill-button { clip-path: polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%); }
+  .weapon-primary .weapon-group-label b { display: none; }
+  .weapon-strip { clip-path: polygon(0 6px, 6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%); }
+  .weapon-group-label { letter-spacing: 0; }
   .skill-kind { font-size: 5px; letter-spacing: .04em; }
   .skill-key { display: block; min-width: 19px; padding: 2px 4px; font-size: 10px; }
   .skill-icon { width: 33px; height: 33px; }

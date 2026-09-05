@@ -1,6 +1,7 @@
 export class AssetManager {
   private readonly images = new Map<string, HTMLImageElement>();
   private readonly failed = new Set<string>();
+  private readonly pending = new Map<string, Promise<HTMLImageElement | null>>();
 
   private key(path: string): string {
     return path.replace(/^\.\//, '');
@@ -8,7 +9,10 @@ export class AssetManager {
 
   public async preload(paths: readonly string[]): Promise<void> {
     const unique = [...new Set(paths.filter(Boolean).map((path) => this.key(path)))];
-    await Promise.all(unique.map((path) => this.load(path)));
+    let next = 0;
+    await Promise.all(Array.from({ length: Math.min(6, unique.length) }, async () => {
+      while (next < unique.length) await this.load(unique[next++]!);
+    }));
   }
 
   public async load(path: string): Promise<HTMLImageElement | null> {
@@ -16,7 +20,9 @@ export class AssetManager {
     const existing = this.images.get(key);
     if (existing) return existing;
     if (this.failed.has(key)) return null;
-    return await new Promise((resolve) => {
+    const pending = this.pending.get(key);
+    if (pending) return pending;
+    const request = new Promise<HTMLImageElement | null>((resolve) => {
       const image = new Image();
       image.decoding = 'async';
       image.onload = () => {
@@ -30,6 +36,9 @@ export class AssetManager {
       };
       image.src = `./${key}`;
     });
+    this.pending.set(key, request);
+    try { return await request; }
+    finally { this.pending.delete(key); }
   }
 
   public get(path: string): HTMLImageElement | null {
